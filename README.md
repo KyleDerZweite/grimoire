@@ -10,7 +10,7 @@ Grimoire is a free, self-hosted alternative to Carrd, Beacons, and Linktree. Use
 
 ## Status
 
-**In Planning** — Architecture and tech stack under evaluation.
+**In Planning** — Architecture finalized, ready for implementation.
 
 ## Documentation
 
@@ -23,15 +23,15 @@ Grimoire is a free, self-hosted alternative to Carrd, Beacons, and Linktree. Use
 
 ### Phase 1: MVP
 - User authentication (OIDC)
-- Form-based site editor
-- Live preview
+- Form-based site editor with Puck
+- Live SSR preview
 - Linktree-style template
 - Export as downloadable ZIP
 
 ### Phase 2: Auto-Deploy
 - Push-button publishing
-- Git integration for versioning
-- CI/CD pipeline for automatic deployment
+- Git integration (Forgejo) for versioning
+- CI/CD pipeline with act_runner
 - Subdomain routing
 
 ### Phase 3: Advanced
@@ -42,15 +42,32 @@ Grimoire is a free, self-hosted alternative to Carrd, Beacons, and Linktree. Use
 
 ## Tech Stack
 
-> Pending research.
-
-| Component | Candidates |
+| Component | Technology |
 |-----------|------------|
-| Dashboard | Astro + React, Next.js, or SvelteKit |
-| Backend | Hono, FastAPI, or Astro API routes |
-| Database | PostgreSQL |
+| Dashboard | Astro + React (SSR) |
+| Visual Editor | Puck |
+| Build Engine | Astro (Static) |
+| Database | PostgreSQL + Drizzle |
 | Auth | OIDC Provider (PKCE) |
-| Output | Astro static sites |
+| Git Server | Forgejo |
+| CI/CD | act_runner |
+| Output | Static Astro sites |
+
+## Project Structure
+
+```
+grimoire/
+├── apps/
+│   ├── dashboard/     # Admin + Visual Editor
+│   └── renderer/      # Static site generator
+├── packages/
+│   ├── ui/            # Design system
+│   ├── blocks/        # Site components
+│   ├── database/      # Drizzle schema
+│   └── auth/          # OIDC utilities
+├── docs/              # Documentation
+└── research/          # Research documents
+```
 
 ## KyleHub Infrastructure
 
@@ -59,7 +76,7 @@ Grimoire is a KyleHub-native application, leveraging:
 - **OIDC Provider** for authentication
 - **PostgreSQL** for data storage
 - **Reverse Proxy + Tunnels** for deployment and routing
-- **Git Server** for version control (planned)
+- **Forgejo** for version control
 
 ## Contributing
 

@@ -51,21 +51,68 @@ Grimoire is a KyleHub-native application, meaning it leverages existing KyleHub 
 | Reverse Proxy | Ingress, tunnel management | `*.kylehub.dev` |
 | Tunnel Agent | Secure tunnels for site hosting | Via reverse proxy |
 
-## Proposed Tech Stack
+## Finalized Tech Stack
 
-> **Note**: Final stack pending research.
+Based on research, the following stack has been selected:
 
-| Layer | Candidates | Decision Pending |
-|-------|------------|------------------|
-| Dashboard/Editor | Astro + React, Next.js, SvelteKit | Yes |
-| Backend API | Hono, FastAPI, Astro API routes | Yes |
-| Database | PostgreSQL (existing) | Decided |
-| Auth | OIDC Provider | Decided |
-| Preview | Client-side mock, SSR, or real dev server | Yes |
-| Output | Astro static sites + React islands | Decided |
-| Storage | Local disk or S3-compatible | TBD |
+### Infrastructure
 
-## Data Model (Draft)
+| Layer | Technology | Rationale |
+|-------|------------|-----------|
+| Identity | OIDC Provider | Existing KyleHub auth |
+| Git Server | Forgejo | Lightweight (~150MB RAM), GitHub Actions compatible, non-profit governance |
+| CI/CD Runner | act_runner | GitHub Actions workflows, minimal resources |
+| Database | PostgreSQL | Existing infrastructure |
+| Reverse Proxy | Traefik | Dynamic subdomain routing, auto-SSL |
+
+### Application
+
+| Layer | Technology | Rationale |
+|-------|------------|-----------|
+| Dashboard | Astro + React (SSR) | Islands architecture, rich interactivity where needed |
+| Visual Editor | Puck | Open-source, JSON-first, data-centric |
+| Build Engine | Astro (Static) | Zero-JS output, perfect for user sites |
+| ORM | Drizzle | Type-safe, works with PostgreSQL |
+| State | Zustand + React Query | Simple, performant |
+| Styling | Tailwind CSS | Utility-first, consistent |
+
+### Output
+
+| Output | Format |
+|--------|--------|
+| User Sites | Static Astro (HTML/CSS, minimal JS) |
+| Interactive Elements | React Islands (Spotify embeds, etc.) |
+
+## Monorepo Structure
+
+```
+grimoire/
+├── apps/
+│   ├── dashboard/          # Astro + React (SSR) — Admin + Editor
+│   │   ├── src/
+│   │   │   ├── pages/      # Landing, login, dashboard, editor
+│   │   │   ├── components/ # React components for editor
+│   │   │   └── lib/        # API client, auth helpers
+│   │   └── astro.config.mjs
+│   │
+│   └── renderer/           # Astro (Static) — Build engine
+│       └── src/
+│           └── pages/
+│               └── [...slug].astro  # Catch-all dynamic route
+│
+├── packages/
+│   ├── ui/                 # Design system (buttons, inputs, modals)
+│   ├── blocks/             # Site components (Hero, Links, Profile, etc.)
+│   ├── database/           # Drizzle schema + client
+│   ├── auth/               # OIDC utilities and middleware
+│   └── config/             # Shared TypeScript and Tailwind config
+│
+├── docker/                 # Docker Compose, Nginx/Traefik config
+├── docs/                   # Documentation
+└── research/               # Research documents
+```
+
+## Data Model
 
 ### User
 
@@ -88,7 +135,7 @@ interface Site {
   userId: string;          // Owner
   slug: string;            // URL path (e.g., "yuna")
   template: 'linktree' | 'portfolio';
-  config: SiteConfig;      // Template-specific config
+  config: SiteConfig;      // Template-specific config (JSONB)
   theme: ThemeConfig;
   published: boolean;
   publishedAt?: Date;
@@ -113,7 +160,7 @@ interface LinktreeSiteConfig {
     icon?: string;
   }>;
   socials: Array<{
-    platform: 'twitter' | 'instagram' | 'github' | 'discord' | 'spotify' | ...;
+    platform: 'twitter' | 'instagram' | 'github' | 'discord' | 'spotify';
     url: string;
   }>;
   embeds?: Array<{
@@ -143,39 +190,42 @@ interface ThemeConfig {
 }
 ```
 
-## Template System
+## Key Architectural Patterns
 
-Templates are complete Astro projects that get populated with user config at build time.
+### Dual-Context Components
 
-```
-templates/
-├── linktree/
-│   ├── astro.config.mjs
-│   ├── package.json
-│   ├── src/
-│   │   ├── pages/
-│   │   │   └── index.astro    # Uses config from props/data
-│   │   ├── components/
-│   │   │   ├── ProfileCard.astro
-│   │   │   ├── LinkButton.astro
-│   │   │   ├── SocialIcons.astro
-│   │   │   └── SpotifyEmbed.tsx  # React island
-│   │   └── styles/
-│   │       └── global.css
-│   └── public/
-│
-└── portfolio/              # Future
-    └── ...
-```
+Components in `packages/blocks` are used in two contexts:
+1. **Editor Context**: Wrapped with drag-and-drop handlers, overlay controls
+2. **Renderer Context**: Pure HTML/CSS output, no editor overhead
 
-**Build Process**:
-1. Copy template to temp directory
-2. Inject user's `SiteConfig` as JSON
-3. Run `npm install && npm run build`
-4. Output is static `dist/` folder
-5. ZIP and return, or push to Git for deployment
+This is solved by the monorepo — same source code, different build targets.
 
-## API Endpoints (Draft)
+### Live Preview
+
+Uses **SSR iframe preview** (not client-side mock):
+1. User edits in Puck editor
+2. Changes debounced and sent to `/api/preview`
+3. Astro SSR renders actual HTML
+4. Iframe displays the real output
+
+This ensures WYSIWYG accuracy.
+
+### Build Engine
+
+The renderer is invoked programmatically:
+1. Dashboard spawns child process
+2. `astro build` runs with `SITE_ID` env var
+3. Catch-all route fetches config from database
+4. Static `dist/` folder is generated
+5. ZIP for download or push to Git for deployment
+
+### Dynamic Subdomain Routing
+
+Nginx/Traefik `map` directive handles subdomains without config reloads:
+- `alice.grimoire.kylehub.dev` → `/var/www/sites/alice`
+- Custom domains via Traefik with auto Let's Encrypt
+
+## API Endpoints
 
 ```
 GET    /api/sites              # List user's sites
@@ -187,62 +237,42 @@ DELETE /api/sites/:id          # Delete site
 POST   /api/sites/:id/build    # Trigger build
 GET    /api/sites/:id/download # Download ZIP
 
+POST   /api/preview            # SSR preview endpoint
+
 GET    /api/templates          # List available templates
 GET    /api/templates/:id      # Get template info
 ```
 
-## Preview Strategy Options
+## Security Considerations
 
-| Approach | Pros | Cons |
-|----------|------|------|
-| Client-side mock | Instant, lightweight | May not match build 100% |
-| Server-rendered | Accurate | Slower feedback |
-| Real Astro dev server | True preview | Resource heavy |
-| Build-on-change | Accurate | Slow (seconds per change) |
+| Risk | Mitigation |
+|------|------------|
+| XSS in user content | DOMPurify sanitization at build time |
+| SVG script injection | Strip `<script>` and `on*` attributes |
+| Cookie scope | `SameSite=Lax`, don't scope to wildcard |
+| IDOR attacks | Middleware validates `org_id` on every request |
+| M2M auth | Service Users with JWT Profile |
 
-**Recommendation**: Start with client-side mock for v1. Components render in the editor using the same React components that will be used in the build, ensuring visual accuracy.
+## Deployment Flow
 
-## Deployment Flow (v1)
+### v1: Manual ZIP Download
 
 ```
-User saves site
-      │
-      ▼
-Dashboard calls POST /api/sites/:id/build
-      │
-      ▼
-Backend copies template + injects config
-      │
-      ▼
-Backend runs `npm run build`
-      │
-      ▼
-Backend zips `dist/` folder
-      │
-      ▼
-User downloads ZIP
-      │
-      ▼
-Kyle manually deploys via reverse proxy
+User saves site → Build triggered → ZIP generated → User downloads → Manual deploy
 ```
 
-## Future: Automated Deployment (v2)
+### v2: Automated Pipeline
 
 ```
 User clicks "Publish"
-      │
-      ▼
-Backend pushes site to Git (user's repo)
-      │
-      ▼
+      ↓
+Backend pushes to Git (user's repo)
+      ↓
 Git webhook triggers CI/CD
-      │
-      ▼
+      ↓
 CI/CD builds and deploys to tunnel endpoint
-      │
-      ▼
-Reverse proxy routes yuna.grimoire.kylehub.dev → tunnel
-      │
-      ▼
+      ↓
+Reverse proxy routes subdomain → tunnel
+      ↓
 Site is live!
 ```
