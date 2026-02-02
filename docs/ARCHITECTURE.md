@@ -36,10 +36,32 @@ Grimoire is a KyleHub-native application, meaning it leverages existing KyleHub 
         │
         ▼
 ┌───────────────┐
-│ yuna.grimoire │
-│ .kylehub.dev  │
+│  yuna.kylehub │
+│     .dev      │
+│ OR yunasoul.de│
 └───────────────┘
 ```
+
+## URL & Domain Structure
+
+| URL | Purpose |
+|-----|-------|
+| `grimoire.kylehub.dev` | Dashboard (editor, settings, admin) |
+| `yuna.kylehub.dev` | Yuna's personal site |
+| `yuna.kylehub.dev/socials` | Future: sub-pages |
+| `yunasoul.de` | Custom domain (points to Yuna's site) |
+
+### Routing Logic
+
+1. **Wildcard DNS**: `*.kylehub.dev` → reverse proxy
+2. **Reserved subdomains**: `grimoire`, `auth`, `git`, etc. → specific services
+3. **User subdomains**: All other `*.kylehub.dev` → look up in database → serve user site
+4. **Custom domains**: Look up domain in database → serve user site
+
+### SSL Strategy
+
+- **Wildcard cert** for `*.kylehub.dev` (covers all user subdomains)
+- **Let's Encrypt auto-cert** for custom domains via Traefik ACME
 
 ## External Dependencies (KyleHub Infrastructure)
 
@@ -133,7 +155,8 @@ interface User {
 interface Site {
   id: string;
   userId: string;          // Owner
-  slug: string;            // URL path (e.g., "yuna")
+  subdomain: string;       // e.g., "yuna" → yuna.kylehub.dev
+  customDomain?: string;   // e.g., "yunasoul.de" (optional)
   template: 'linktree' | 'portfolio';
   config: SiteConfig;      // Template-specific config (JSONB)
   theme: ThemeConfig;
