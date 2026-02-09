@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# new-site.sh — Create a new Grimoire site from the base template
+# new-site.sh - Create a new Grimoire site from the base template
 #
 # Usage: pnpm run new-site <site-name>
 #   or:  bash scripts/new-site.sh <site-name>
@@ -31,7 +31,7 @@ cp -r "$TEMPLATE_DIR" "$SITE_DIR"
 
 # Update package name in the new site's package.json
 sed -i "s|@grimoire/base-astro|@grimoire/site-${SITE_NAME}|g" "$SITE_DIR/package.json"
-sed -i "s|Base Astro template — copy this to sites/ to create a new site|${SITE_NAME}'s site|g" "$SITE_DIR/package.json"
+sed -i "s|Base Astro template - copy this to sites/ to create a new site|${SITE_NAME}'s site|g" "$SITE_DIR/package.json"
 
 echo ""
 echo "Site created at: sites/$SITE_NAME"

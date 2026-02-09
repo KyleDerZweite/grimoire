@@ -1,5 +1,5 @@
 services:
-  # The Traffic Director — serves all static sites
+  # The Traffic Director - serves all static sites
   router:
     image: nginx:alpine
     container_name: grimoire_router
@@ -11,7 +11,7 @@ services:
     networks:
       - pangolin_net
 
-  # The Network Connector — tunnels traffic from Pangolin
+  # The Network Connector - tunnels traffic from Pangolin
   newt:
     image: fosrl/newt:latest
     container_name: grimoire_newt

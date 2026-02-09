@@ -10,4 +10,10 @@ export default defineConfig({
 
   // Output static HTML (default)
   output: 'static',
+
+  // Use relative paths so dist/index.html works when opened directly
+  base: '',
+  build: {
+    assetsPrefix: '.',
+  },
 });

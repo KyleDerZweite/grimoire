@@ -2,7 +2,7 @@
   "name": "@grimoire/base-astro",
   "version": "0.1.0",
   "private": true,
-  "description": "Base Astro template — copy this to sites/ to create a new site",
+  "description": "Base Astro template - copy this to sites/ to create a new site",
   "type": "module",
   "scripts": {
     "dev": "astro dev",

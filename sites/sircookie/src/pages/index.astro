@@ -1,293 +1,135 @@
 ---
-// index.astro — sircookiiie Link-in-bio page
+// index.astro - Sir.Cookie link-in-bio | Midnight Frost
 
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SocialLinkButton from '../components/SocialLinkButton.astro';
+import LinkButton from '../components/LinkButton.astro';
+import SpotifyEmbed from '../components/SpotifyEmbed.astro';
 
-// ── Profile Configuration ──
 const profile = {
-  name: 'sircookiiie',
-  bio: 'Hey ich bin ein League spieler also auch Mentality ill.',
-  avatar: '/images/avatar.png',
-  banner: '/images/banner.jpg',
+  name: 'Sir.Cookie',
+  bio: 'Hey ich bin ein League spieler also auch Mentally Ill.',
+  avatar: './avatar.png',
+  banner: './banner.jpg',
 };
 
-// ── Social Links ──
-const socialLinks = [
-  { href: 'https://www.snapchat.com/add/leon.schf18?share_id=oDceTAPFPqk&locale=de-DE', label: 'Snapchat', icon: 'snapchat' as const },
-  { href: 'https://www.instagram.com/leon.schf._/', label: 'Instagram', icon: 'instagram' as const },
-  { href: 'https://www.twitch.tv/sir_cookiie/', label: 'Twitch', icon: 'twitch' as const },
-  { href: 'https://discord.gg/9jJ2UHvNtg', label: 'Discord', icon: 'discord' as const },
+const links = [
+  {
+    href: 'https://www.snapchat.com/add/leon.schf18?share_id=oDceTAPFPqk&locale=de-DE',
+    label: 'Snapchat',
+    brandColor: '#FFFC00',
+    icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.166 3c.796 0 3.495.223 4.769 3.073.426.953.323 2.582.239 3.883l-.012.174c-.013.191-.026.382-.034.565a.55.55 0 0 0 .307.527.668.668 0 0 0 .318.082c.168 0 .363-.068.58-.202.127-.08.263-.12.403-.12.168 0 .32.055.459.148l.041.03c.222.168.338.372.338.613a.702.702 0 0 1-.043.235c-.201.575-.967.853-1.4.986l-.073.023c-.095.03-.176.055-.236.082a.672.672 0 0 0-.362.514c-.013.09-.003.18.027.266.387.878 1.09 1.586 1.88 2.136.338.236.702.429 1.04.564.17.068.479.185.509.47.03.336-.412.62-.536.694a5.43 5.43 0 0 1-.906.43c-.159.055-.303.123-.333.291-.02.12.014.247.044.36.027.1.074.262-.023.396-.104.149-.317.218-.6.218-.207 0-.442-.039-.672-.078a4.772 4.772 0 0 0-.894-.1c-.2 0-.378.023-.544.072-.398.12-.74.387-1.118.683-.6.466-1.284.994-2.467.994-.04 0-.08-.002-.12-.004a.958.958 0 0 1-.11.004c-1.183 0-1.866-.528-2.465-.994-.38-.296-.722-.564-1.12-.683a2.11 2.11 0 0 0-.543-.072c-.328 0-.622.048-.894.1-.23.04-.465.078-.672.078-.283 0-.496-.069-.6-.218-.098-.134-.05-.296-.024-.397.031-.112.065-.24.044-.36-.03-.167-.173-.235-.332-.29a5.43 5.43 0 0 1-.907-.43c-.123-.074-.565-.358-.535-.695.03-.284.339-.401.509-.47.338-.134.702-.327 1.04-.563a4.82 4.82 0 0 0 1.88-2.136.534.534 0 0 0 .027-.266.672.672 0 0 0-.363-.514 2.04 2.04 0 0 0-.235-.082l-.073-.023c-.434-.133-1.2-.41-1.4-.986a.703.703 0 0 1-.044-.235c0-.241.116-.445.338-.612l.041-.031a.742.742 0 0 1 .46-.148c.139 0 .275.04.402.12.217.134.412.202.58.202a.668.668 0 0 0 .318-.082.55.55 0 0 0 .308-.527c-.009-.183-.022-.374-.035-.565l-.011-.174c-.085-1.3-.188-2.93.238-3.883C8.505 3.223 11.204 3 12 3h.166Z"/></svg>`,
+  },
+  {
+    href: 'https://www.instagram.com/leon.schf._/',
+    label: 'Instagram',
+    brandColor: '#E1306C',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>`,
+  },
+  {
+    href: 'https://www.twitch.tv/sir_cookiie/',
+    label: 'Twitch',
+    brandColor: '#9146FF',
+    icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>`,
+  },
+  {
+    href: 'https://discord.gg/9jJ2UHvNtg',
+    label: 'Discord',
+    brandColor: '#5865F2',
+    icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>`,
+  },
 ];
 
-// ── Spotify Playlist Embeds ──
-const spotifyPlaylists = [
-  'https://open.spotify.com/embed/playlist/0qSrEPsqXo0fceo1CLoVek?utm_source=generator',
-  'https://open.spotify.com/embed/playlist/1nnC73oem9tjb94sgkf3WB?utm_source=generator',
+const playlists = [
+  {
+    src: 'https://open.spotify.com/embed/playlist/0qSrEPsqXo0fceo1CLoVek?utm_source=generator',
+    label: 'Night Drive',
+  },
+  {
+    src: 'https://open.spotify.com/embed/playlist/1nnC73oem9tjb94sgkf3WB?utm_source=generator',
+    label: 'Vibes',
+  },
 ];
 ---
 
-<BaseLayout 
-  title={`${profile.name} — Links`} 
-  description={profile.bio}
-  bannerImage={profile.banner}
->
+<BaseLayout title={`${profile.name} - Links`} description={profile.bio}>
   <main class="page">
-    <div class="card">
 
-      <!-- ── Banner ── -->
-      <div class="banner animate-scale-in">
-        <img src={profile.banner} alt="Banner" class="banner__img" />
-        <div class="banner__fade"></div>
+    <!-- Fullscreen blurred banner background -->
+    <div class="bg-banner" aria-hidden="true">
+      <img src={profile.banner} alt="" class="bg-banner__image" />
+      <div class="bg-banner__overlay"></div>
+    </div>
+
+    <div class="card animate-fade-in delay-1">
+
+      <!-- Banner inside card -->
+      <div class="banner">
+        <img src={profile.banner} alt="" class="banner__image" />
+        <div class="banner__overlay" aria-hidden="true"></div>
       </div>
 
-      <div class="content-wrapper">
-        <!-- ── Profile ── -->
-        <section class="profile">
-          <div class="profile__avatar animate-scale-in delay-2">
-            <img src={profile.avatar} alt={profile.name} />
-          </div>
-          <h1 class="profile__name animate-fade-up delay-3">{profile.name}</h1>
-          <p class="profile__bio animate-fade-up delay-4">{profile.bio}</p>
-        </section>
+      <div class="card__content">
 
-        <!-- ── Social Links ── -->
-        <section class="links">
-          {socialLinks.map((link, i) => (
-            <div class={`animate-fade-up delay-${i + 5}`}>
-              <SocialLinkButton href={link.href} label={link.label} icon={link.icon} />
-            </div>
-          ))}
-        </section>
-
-        <!-- ── Buy Me a Coffee ── -->
-        <div class="animate-fade-up delay-9 coffee">
-          <SocialLinkButton href="#" label="Buy me a coffee ☕" icon="coffee" variant="accent" />
+        <!-- Avatar -->
+        <div class="avatar-wrapper animate-scale-in delay-3">
+          <img
+            src={profile.avatar}
+            alt={profile.name}
+            class="avatar"
+            width="88"
+            height="88"
+          />
+          <div class="avatar-ring" aria-hidden="true"></div>
+          <div class="avatar-pulse" aria-hidden="true"></div>
         </div>
 
-        <!-- ── Spotify Playlists ── -->
-        <section class="playlists">
-          {spotifyPlaylists.map((src, i) => (
-            <div class={`animate-fade-up delay-${i + 10}`}>
-              <iframe
-                style="border-radius:12px"
-                src={src}
-                width="100%"
-                height="352"
-                frameBorder="0"
-                allowfullscreen
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-              ></iframe>
+        <!-- Profile Info -->
+        <section class="profile">
+          <h1 class="profile__name animate-fade-up delay-4">{profile.name}</h1>
+          <p class="profile__bio animate-fade-up delay-5">{profile.bio}</p>
+        </section>
+
+        <!-- Separator -->
+        <div class="separator animate-fade-up delay-5" aria-hidden="true">
+          <span class="separator__line"></span>
+          <span class="separator__dot"></span>
+          <span class="separator__line"></span>
+        </div>
+
+        <!-- Links -->
+        <section class="links">
+          {links.map((link, i) => (
+            <div class={`animate-fade-up delay-${i + 6}`}>
+              <LinkButton
+                href={link.href}
+                label={link.label}
+                icon={link.icon}
+                brandColor={link.brandColor}
+              />
             </div>
           ))}
         </section>
 
-        <!-- ── Footer ── -->
-        <footer class="footer animate-fade-up delay-12">
+        <!-- Spotify Section -->
+        <section class="widgets">
+          <div class="section-label animate-fade-up delay-10">
+            <span class="section-label__line"></span>
+            <span class="section-label__text">Now Playing</span>
+            <span class="section-label__line"></span>
+          </div>
+          {playlists.map((pl, i) => (
+            <div class={`animate-fade-up delay-${i + 11}`}>
+              <SpotifyEmbed src={pl.src} label={pl.label} />
+            </div>
+          ))}
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer animate-fade-up delay-14">
           <p>&copy; {new Date().getFullYear()} {profile.name}</p>
         </footer>
-      </div>
 
+      </div>
     </div>
   </main>
 </BaseLayout>
-
-<style>
-  /* ── Page ── */
-  .page {
-    width: 100%;
-    min-height: 100dvh;
-    display: flex;
-    justify-content: center;
-    padding: 32px 16px;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* ── Card ── */
-  .card {
-    width: 100%;
-    max-width: 640px;
-    background: #23262a;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.45);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-self: flex-start;
-  }
-
-  /* ── Banner ── */
-  .banner {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    max-height: 280px;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  .banner__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .banner__fade {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 60%;
-    background: linear-gradient(to top, #23262a 0%, transparent 100%);
-    pointer-events: none;
-  }
-
-  /* ── Content Wrapper ── */
-  .content-wrapper {
-    width: 100%;
-    padding: 0 32px 40px 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* ── Profile ── */
-  .profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-top: -64px;
-    margin-bottom: 32px;
-    width: 100%;
-    position: relative;
-    z-index: 2;
-  }
-
-  .profile__avatar {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 6px solid #23262a;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    flex-shrink: 0;
-    margin-bottom: 16px;
-  }
-
-  .profile__avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .profile__name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #f5f5f5;
-    margin: 0 0 8px 0;
-  }
-
-  .profile__bio {
-    font-size: 0.9rem;
-    color: #9ca3af;
-    margin: 0;
-    max-width: 400px;
-    line-height: 1.5;
-  }
-
-  /* ── Links ── */
-  .links {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-
-  /* ── Coffee ── */
-  .coffee {
-    width: 100%;
-    margin-bottom: 32px;
-  }
-
-  /* ── Playlists ── */
-  .playlists {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-bottom: 8px;
-  }
-
-  .playlists iframe {
-    display: block;
-    width: 100%;
-    border-radius: 12px;
-  }
-
-  /* ── Footer ── */
-  .footer {
-    width: 100%;
-    text-align: center;
-    margin-top: 24px;
-  }
-
-  .footer p {
-    font-size: 0.7rem;
-    color: #6b7280;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin: 0;
-  }
-
-  /* ── Responsive ── */
-  @media (max-width: 600px) {
-    .page {
-      padding: 16px 10px;
-    }
-
-    .card {
-      border-radius: 20px;
-    }
-
-    .content-wrapper {
-      padding: 0 20px 32px 20px;
-    }
-
-    .profile__avatar {
-      width: 96px;
-      height: 96px;
-      margin-top: 0;
-    }
-
-    .profile {
-      margin-top: -56px;
-    }
-  }
-
-  @media (max-width: 400px) {
-    .page {
-      padding: 8px;
-    }
-    
-    .content-wrapper {
-      padding: 0 16px 24px 16px;
-    }
-
-    .profile__avatar {
-      width: 90px;
-      height: 90px;
-      border-width: 5px;
-    }
-
-    .profile {
-      margin-top: -50px;
-    }
-  }
-</style>

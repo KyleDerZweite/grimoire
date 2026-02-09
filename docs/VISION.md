@@ -1,14 +1,14 @@
-# Grimoire — Project Vision
+# Grimoire - Project Vision
 
 ## Overview
 
-Grimoire is a **Static Site Factory** — a streamlined workflow for generating bespoke static websites for friends and personal use. Using AI-assisted coding, each site is built as a unique Astro project with zero ongoing maintenance overhead.
+Grimoire is a **Static Site Factory** - a streamlined workflow for generating bespoke static websites for friends and personal use. Using AI-assisted coding, each site is built as a unique Astro project with zero ongoing maintenance overhead.
 
 ## Why This Works
 
 1. **AI Synergy**: AI coding assistants excel at writing Astro/Tailwind code
 2. **Lightweight**: NGINX Alpine serves static files with minimal resources
-3. **Security**: No database, no admin panel — minimal attack surface
+3. **Security**: No database, no admin panel - minimal attack surface
 4. **True Customization**: Every site is a blank canvas
 
 ## Target Users
@@ -21,7 +21,7 @@ Grimoire is a **Static Site Factory** — a streamlined workflow for generating 
 
 ## Core Value Proposition
 
-> A monorepo workflow where you use AI to rapidly create beautiful, performant static sites for friends — deployed via NGINX and managed as code.
+> A monorepo workflow where you use AI to rapidly create beautiful, performant static sites for friends - deployed via NGINX and managed as code.
 
 ## What Grimoire Is
 
@@ -46,15 +46,15 @@ Since there's no CMS, you are the webmaster:
 3. You push to Git and rebuild
 4. Site is updated
 
-If this becomes a bottleneck, integrate a Git-based CMS like **Keystatic** or **Decap CMS** — zero database, zero backend.
+If this becomes a bottleneck, integrate a Git-based CMS like **Keystatic** or **Decap CMS** - zero database, zero backend.
 
 ## Design Principles
 
-1. **Code over Configuration** — Write actual code, not CMS configs
-2. **AI-Assisted Development** — Leverage coding assistants for rapid iteration
-3. **Static over Dynamic** — Output is HTML/CSS/JS, fast and cheap to host
-4. **Monorepo for Consistency** — Shared components, consistent tooling
-5. **Fun and Learning** — This is a creative outlet, not enterprise software
+1. **Code over Configuration** - Write actual code, not CMS configs
+2. **AI-Assisted Development** - Leverage coding assistants for rapid iteration
+3. **Static over Dynamic** - Output is HTML/CSS/JS, fast and cheap to host
+4. **Monorepo for Consistency** - Shared components, consistent tooling
+5. **Fun and Learning** - This is a creative outlet, not enterprise software
 
 ## Scope
 

@@ -1,8 +1,8 @@
-# Grimoire — Architecture
+# Grimoire - Architecture
 
 ## Overview
 
-Grimoire is a **Static Site Factory** — a streamlined workflow for generating bespoke static sites for friends and personal use. Using AI-assisted coding, each site is built as a unique Astro project and deployed via NGINX.
+Grimoire is a **Static Site Factory** - a streamlined workflow for generating bespoke static sites for friends and personal use. Using AI-assisted coding, each site is built as a unique Astro project and deployed via NGINX.
 
 ## System Context
 
@@ -232,7 +232,7 @@ If self-service editing becomes necessary, integrate a Git-based CMS:
 | [Keystatic](https://keystatic.com) | Local/cloud editor, saves to JSON/Markdown |
 | [Decap CMS](https://decapcms.org) | Browser-based, saves to Git |
 
-These require **zero database** and **zero backend hosting** — they fit perfectly into the static workflow.
+These require **zero database** and **zero backend hosting** - they fit perfectly into the static workflow.
 
 ## Security Considerations
 
@@ -247,7 +247,7 @@ These require **zero database** and **zero backend hosting** — they fit perfec
 
 1. **AI Synergy**: AI assistants excel at writing code (Astro, Tailwind), not configuring CMS schemas
 2. **Performance**: NGINX uses minimal RAM; no Node.js runtime
-3. **True Customization**: Each site is a blank canvas — use React, Svelte, or plain HTML
+3. **True Customization**: Each site is a blank canvas - use React, Svelte, or plain HTML
 4. **Security**: No database, no admin panel, minimal attack surface
 5. **Cost**: Near-zero hosting costs for static files
 6. **Simplicity**: From "Platform Maintainer" to "Creative Director"

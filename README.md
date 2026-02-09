@@ -4,13 +4,13 @@ A **Static Site Factory** for creating beautiful, bespoke websites for friends a
 
 ## What is Grimoire?
 
-Grimoire is a monorepo workflow for rapidly creating and deploying static websites. Using AI coding assistants, each site is a unique Astro project — a blank canvas with unlimited creative freedom.
+Grimoire is a monorepo workflow for rapidly creating and deploying static websites. Using AI coding assistants, each site is a unique Astro project - a blank canvas with unlimited creative freedom.
 
 **Output**: Static Astro sites served via NGINX.
 
 ## Status
 
-**In Development** — Architecture finalized, ready for implementation.
+**In Development** - Architecture finalized, ready for implementation.
 
 ## Documentation
 

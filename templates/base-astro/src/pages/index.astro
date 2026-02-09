@@ -1,5 +1,5 @@
 ---
-// index.astro — Link-in-bio page
+// index.astro - Link-in-bio page
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LinkButton from '../components/LinkButton.astro';
@@ -10,7 +10,7 @@ import DiscordWidget from '../components/DiscordWidget.astro';
 const profile = {
   name: 'Your Name',
   handle: '@yourhandle',
-  bio: 'A short bio about yourself — keep it warm, keep it real.',
+  bio: 'A short bio about yourself - keep it warm, keep it real.',
   avatar: '', // path to avatar image, or leave empty for initial placeholder
 };
 
@@ -24,7 +24,7 @@ const links = [
 ];
 ---
 
-<BaseLayout title={`${profile.name} — Links`} description={profile.bio}>
+<BaseLayout title={`${profile.name} - Links`} description={profile.bio}>
   <main class="page">
 
     <!-- Decorative background elements -->
