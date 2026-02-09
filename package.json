@@ -7,7 +7,6 @@
   "author": "KyleDerZweite",
   "scripts": {
     "build": "pnpm -r --filter './sites/**' run build",
-    "build:ui": "pnpm --filter @grimoire/ui run build",
     "dev": "echo 'Usage: pnpm --filter sites/<name> dev'",
     "new-site": "bash scripts/new-site.sh",
     "lint": "pnpm -r run lint",

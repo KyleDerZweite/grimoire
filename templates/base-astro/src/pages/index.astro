@@ -1,14 +1,303 @@
 ---
-// index.astro — Homepage
-// TODO: Replace with actual site content
+// index.astro — Link-in-bio page
 
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LinkButton from '../components/LinkButton.astro';
+import SpotifyEmbed from '../components/SpotifyEmbed.astro';
+import DiscordWidget from '../components/DiscordWidget.astro';
+
+// ── Configure your profile ──
+const profile = {
+  name: 'Your Name',
+  handle: '@yourhandle',
+  bio: 'A short bio about yourself — keep it warm, keep it real.',
+  avatar: '', // path to avatar image, or leave empty for initial placeholder
+};
+
+// ── Configure your links ──
+const links = [
+  { href: 'https://twitter.com', label: 'Twitter / X', icon: '𝕏' },
+  { href: 'https://github.com', label: 'GitHub', icon: '◐' },
+  { href: 'https://youtube.com', label: 'YouTube', icon: '▶' },
+  { href: 'https://example.com', label: 'My Website', icon: '◈' },
+  { href: 'mailto:hello@example.com', label: 'Email Me', icon: '✉' },
+];
 ---
 
-<BaseLayout title="My Site">
-  <main>
-    <h1>Hello, World!</h1>
-    <p>This site was built with <a href="https://astro.build">Astro</a> and Grimoire.</p>
-    <!-- TODO: Build out your site here -->
+<BaseLayout title={`${profile.name} — Links`} description={profile.bio}>
+  <main class="page">
+
+    <!-- Decorative background elements -->
+    <div class="bg-glow bg-glow--top" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow--bottom" aria-hidden="true"></div>
+
+    <div class="container">
+
+      <!-- ── Hero Section ── -->
+      <section class="hero">
+
+        <!-- Decorative ornament -->
+        <div class="ornament animate-scale-in delay-1" aria-hidden="true">
+          <svg class="animate-slow-spin" width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M14 0L16.5 11.5L28 14L16.5 16.5L14 28L11.5 16.5L0 14L11.5 11.5Z" fill="currentColor" opacity="0.18"/>
+          </svg>
+        </div>
+
+        <!-- Avatar -->
+        <div class="avatar-wrapper animate-scale-in delay-2">
+          {profile.avatar ? (
+            <img src={profile.avatar} alt={profile.name} class="avatar" width="96" height="96" />
+          ) : (
+            <div class="avatar avatar--placeholder">
+              <span>{profile.name.charAt(0)}</span>
+            </div>
+          )}
+          <div class="avatar-ring" aria-hidden="true"></div>
+        </div>
+
+        <!-- Name & Handle -->
+        <h1 class="hero__name animate-fade-up delay-3">{profile.name}</h1>
+        <p class="hero__handle animate-fade-up delay-4">{profile.handle}</p>
+        <p class="hero__bio animate-fade-up delay-5">{profile.bio}</p>
+
+        <!-- Decorative divider -->
+        <div class="divider animate-fade-up delay-5" aria-hidden="true">
+          <span class="divider__line"></span>
+          <svg class="divider__diamond" width="8" height="8" viewBox="0 0 8 8" fill="none">
+            <rect x="4" y="0" width="5.66" height="5.66" rx="1" transform="rotate(45 4 0)" fill="currentColor" opacity="0.25"/>
+          </svg>
+          <span class="divider__line"></span>
+        </div>
+      </section>
+
+      <!-- ── Links Section ── -->
+      <section class="links">
+        {links.map((link, i) => (
+          <div class={`animate-fade-up delay-${i + 6}`}>
+            <LinkButton href={link.href} label={link.label} icon={link.icon} />
+          </div>
+        ))}
+      </section>
+
+      <!-- ── Widgets Section ── -->
+      <section class="widgets">
+        <div class="animate-fade-up delay-11">
+          <SpotifyEmbed />
+        </div>
+        <div class="animate-fade-up delay-12">
+          <DiscordWidget serverName="My Community" />
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer animate-fade-up delay-12">
+        <p>&copy; {new Date().getFullYear()} {profile.name}</p>
+      </footer>
+
+    </div>
   </main>
 </BaseLayout>
+
+<style>
+  /* ── Page ── */
+  .page {
+    width: 100%;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── Background Glows ── */
+  .bg-glow {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .bg-glow--top {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(191, 109, 74, 0.08) 0%, transparent 70%);
+    top: -180px;
+    right: -100px;
+  }
+
+  .bg-glow--bottom {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(191, 109, 74, 0.06) 0%, transparent 70%);
+    bottom: -120px;
+    left: -80px;
+  }
+
+  /* ── Container ── */
+  .container {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .ornament {
+    color: var(--color-accent);
+    margin-bottom: 20px;
+  }
+
+  /* Avatar */
+  .avatar-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: var(--radius-avatar);
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 1;
+  }
+
+  .avatar--placeholder {
+    background: linear-gradient(135deg, var(--color-accent) 0%, #D4956E 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-surface);
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    font-weight: 400;
+    font-style: italic;
+    user-select: none;
+  }
+
+  .avatar-ring {
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-border);
+    z-index: 0;
+    transition: border-color 0.3s ease;
+  }
+
+  .avatar-wrapper:hover .avatar-ring {
+    border-color: var(--color-accent);
+  }
+
+  /* Text */
+  .hero__name {
+    font-family: var(--font-display);
+    font-size: 1.85rem;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+
+  .hero__handle {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    letter-spacing: 0.03em;
+    margin-bottom: 14px;
+  }
+
+  .hero__bio {
+    font-family: var(--font-body);
+    font-size: 0.925rem;
+    font-weight: 300;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    max-width: 320px;
+    margin-bottom: 24px;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-border);
+  }
+
+  .divider__line {
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .divider__diamond {
+    flex-shrink: 0;
+  }
+
+  /* ── Links ── */
+  .links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  /* ── Widgets ── */
+  .widgets {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+  }
+
+  .footer p {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 480px) {
+    .page {
+      padding: 36px 16px;
+    }
+
+    .hero__name {
+      font-size: 1.6rem;
+    }
+
+    .container {
+      max-width: 100%;
+    }
+  }
+</style>

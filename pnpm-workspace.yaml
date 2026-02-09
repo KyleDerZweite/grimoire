@@ -1,4 +1,7 @@
 packages:
-  - "packages/*"
-  - "templates/*"
-  - "sites/*"
+  - templates/*
+  - sites/*
+
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
