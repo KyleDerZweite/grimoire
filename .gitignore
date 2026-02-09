@@ -416,3 +416,26 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# ── Grimoire ──────────────────────────────────
+
+# Dependencies
+node_modules/
+
+# Astro build outputs
+**/dist/
+**/.astro/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*

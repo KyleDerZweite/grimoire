@@ -2,300 +2,258 @@
 
 ## Overview
 
-Grimoire is a KyleHub-native application, meaning it leverages existing KyleHub infrastructure rather than bundling its own auth, database, and deployment systems.
+Grimoire is a **Static Site Factory** — a streamlined workflow for generating bespoke static sites for friends and personal use. Using AI-assisted coding, each site is built as a unique Astro project and deployed via NGINX.
 
 ## System Context
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                   KyleHub Gateway                    │
-│           (Reverse Proxy + Auth + Routing)          │
+│                   Pangolin Gateway                   │
+│              (Reverse Proxy + Routing)               │
 └─────────────────────────┬───────────────────────────┘
                           │
-        ┌─────────────────┼─────────────────┐
-        │                 │                 │
-        ▼                 ▼                 ▼
-┌───────────────┐ ┌───────────────┐ ┌───────────────┐
-│   Grimoire    │ │  Git Server   │ │  Postgres +   │
-│   Dashboard   │ │  (per-user    │ │    Redis      │
-│   + Editor    │ │    repos)     │ │  (centralized)│
-└───────┬───────┘ └───────────────┘ └───────────────┘
-        │
-        ▼ (on publish)
-┌───────────────┐
-│  Build + Push │
-│   to Git      │
-└───────┬───────┘
-        │
-        ▼ (CI/CD)
-┌───────────────┐
-│ Deploy static │
-│  site via     │
-│    tunnel     │
-└───────────────┘
-        │
-        ▼
-┌───────────────┐
-│  yuna.kylehub │
-│     .dev      │
-│ OR yunasoul.de│
-└───────────────┘
+                          ▼
+┌─────────────────────────────────────────────────────┐
+│                   Newt (Network Bridge)              │
+└─────────────────────────┬───────────────────────────┘
+                          │
+                          ▼
+┌─────────────────────────────────────────────────────┐
+│                    NGINX Router                      │
+│              (Serves Static Files)                   │
+└─────────────────────────┬───────────────────────────┘
+                          │
+          ┌───────────────┼───────────────┐
+          ▼               ▼               ▼
+    ┌──────────┐    ┌──────────┐    ┌──────────┐
+    │  kyle/   │    │  sarah/  │    │   tom/   │
+    │  dist/   │    │  dist/   │    │  dist/   │
+    └──────────┘    └──────────┘    └──────────┘
 ```
 
 ## URL & Domain Structure
 
 | URL | Purpose |
-|-----|-------|
-| `grimoire.kylehub.dev` | Dashboard (editor, settings, admin) |
-| `yuna.kylehub.dev` | Yuna's personal site |
-| `yuna.kylehub.dev/socials` | Future: sub-pages |
-| `yunasoul.de` | Custom domain (points to Yuna's site) |
+|-----|---------|
+| `kyle.kylehub.dev` | Kyle's personal site |
+| `sarah.kylehub.dev` | Friend A (Linktree style) |
+| `tom.kylehub.dev` | Friend B (Complex business site) |
+| `kylesoul.de` | Custom domain (points to kyle's site) |
 
 ### Routing Logic
 
-1. **Wildcard DNS**: `*.kylehub.dev` → reverse proxy
-2. **Reserved subdomains**: `grimoire`, `auth`, `git`, etc. → specific services
-3. **User subdomains**: All other `*.kylehub.dev` → look up in database → serve user site
-4. **Custom domains**: Look up domain in database → serve user site
+1. **Wildcard DNS**: `*.kylehub.dev` → Pangolin → Newt → NGINX
+2. **NGINX map**: Subdomain → corresponding `/usr/share/nginx/html/{subdomain}` folder
+3. **Custom domains**: DNS A/CNAME record → Pangolin handles SSL
 
 ### SSL Strategy
 
-- **Wildcard cert** for `*.kylehub.dev` (covers all user subdomains)
-- **Let's Encrypt auto-cert** for custom domains via Traefik ACME
+- **Wildcard cert** for `*.kylehub.dev` via Pangolin
+- **Custom domains** auto-provisioned via Pangolin's Let's Encrypt integration
 
-## External Dependencies (KyleHub Infrastructure)
-
-| Service | Purpose | Endpoint |
-|---------|---------|----------|
-| OIDC Provider | Authentication (OIDC/PKCE) | `auth.kylehub.dev` |
-| PostgreSQL | User data, site configs | Centralized DB |
-| Git Server | Version control, per-user repos | TBD |
-| Reverse Proxy | Ingress, tunnel management | `*.kylehub.dev` |
-| Tunnel Agent | Secure tunnels for site hosting | Via reverse proxy |
-
-## Finalized Tech Stack
-
-Based on research, the following stack has been selected:
+## Tech Stack
 
 ### Infrastructure
 
 | Layer | Technology | Rationale |
 |-------|------------|-----------|
-| Identity | OIDC Provider | Existing KyleHub auth |
-| Git Server | Forgejo | Lightweight (~150MB RAM), GitHub Actions compatible, non-profit governance |
-| CI/CD Runner | act_runner | GitHub Actions workflows, minimal resources |
-| Database | PostgreSQL | Existing infrastructure |
-| Reverse Proxy | Traefik | Dynamic subdomain routing, auto-SSL |
+| Reverse Proxy | Pangolin | Existing KyleHub infrastructure |
+| Network Bridge | Newt | Secure tunnel from Pangolin to local NGINX |
+| Web Server | NGINX Alpine | Minimal RAM, serves static files |
+| Build Tool | Astro | Zero-JS output, perfect for static sites |
 
-### Application
+### Development Workflow
 
-| Layer | Technology | Rationale |
-|-------|------------|-----------|
-| Dashboard | Astro + React (SSR) | Islands architecture, rich interactivity where needed |
-| Visual Editor | Puck | Open-source, JSON-first, data-centric |
-| Build Engine | Astro (Static) | Zero-JS output, perfect for user sites |
-| ORM | Drizzle | Type-safe, works with PostgreSQL |
-| State | Zustand + React Query | Simple, performant |
-| Styling | Tailwind CSS | Utility-first, consistent |
-
-### Output
-
-| Output | Format |
-|--------|--------|
-| User Sites | Static Astro (HTML/CSS, minimal JS) |
-| Interactive Elements | React Islands (Spotify embeds, etc.) |
+| Tool | Purpose |
+|------|---------|
+| AI Coding Assistant | Generate Astro components, Tailwind styles |
+| PNPM Workspaces | Monorepo management |
+| Git | Version control |
 
 ## Monorepo Structure
 
 ```
 grimoire/
-├── apps/
-│   ├── dashboard/          # Astro + React (SSR) — Admin + Editor
-│   │   ├── src/
-│   │   │   ├── pages/      # Landing, login, dashboard, editor
-│   │   │   ├── components/ # React components for editor
-│   │   │   └── lib/        # API client, auth helpers
-│   │   └── astro.config.mjs
-│   │
-│   └── renderer/           # Astro (Static) — Build engine
-│       └── src/
-│           └── pages/
-│               └── [...slug].astro  # Catch-all dynamic route
+├── package.json                 # PNPM workspace config
+├── pnpm-workspace.yaml
+├── docker-compose.yml           # NGINX Router
+├── nginx.conf                   # Subdomain routing config
 │
 ├── packages/
-│   ├── ui/                 # Design system (buttons, inputs, modals)
-│   ├── blocks/             # Site components (Hero, Links, Profile, etc.)
-│   ├── database/           # Drizzle schema + client
-│   ├── auth/               # OIDC utilities and middleware
-│   └── config/             # Shared TypeScript and Tailwind config
+│   └── ui/                      # Shared Tailwind components
+│       ├── src/
+│       │   ├── Button.astro
+│       │   ├── Card.astro
+│       │   └── index.ts
+│       └── package.json
 │
-├── docker/                 # Docker Compose, Nginx/Traefik config
-├── docs/                   # Documentation
-└── research/               # Research documents
+├── templates/
+│   └── base-astro/              # Blueprint for new projects
+│       ├── src/
+│       │   ├── layouts/
+│       │   ├── pages/
+│       │   └── components/
+│       ├── astro.config.mjs
+│       ├── tailwind.config.mjs
+│       └── package.json
+│
+├── sites/
+│   ├── kyle/                    # Kyle's portfolio
+│   │   ├── src/
+│   │   ├── dist/                # Built output
+│   │   └── package.json
+│   │
+│   ├── sarah/                   # Friend A (Linktree style)
+│   │   ├── src/
+│   │   ├── dist/
+│   │   └── package.json
+│   │
+│   └── tom/                     # Friend B (Business site)
+│       ├── src/
+│       ├── dist/
+│       └── package.json
+│
+└── docs/                        # Documentation
 ```
 
-## Data Model
+## Docker Deployment
 
-### User
+```yaml
+services:
+  # The Traffic Director
+  router:
+    image: nginx:alpine
+    container_name: grimoire_router
+    restart: unless-stopped
+    volumes:
+      # Map all built sites to the Nginx html folder
+      - ./sites/kyle/dist:/usr/share/nginx/html/kyle
+      - ./sites/sarah/dist:/usr/share/nginx/html/sarah
+      - ./sites/tom/dist:/usr/share/nginx/html/tom
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - pangolin_net
 
-```typescript
-interface User {
-  id: string;              // Internal ID
-  externalId: string;      // OIDC provider ID
-  email: string;
-  displayName: string;
-  createdAt: Date;
-  updatedAt: Date;
+  # The Network Connector (Newt)
+  newt:
+    image: fosrl/newt:latest
+    container_name: grimoire_newt
+    restart: unless-stopped
+    environment:
+      - PANGOLIN_ENDPOINT=https://pangolin.kylehub.dev
+      - NEWT_ID=${NEWT_ID}
+      - NEWT_SECRET=${NEWT_SECRET}
+    network_mode: service:router
+
+networks:
+  pangolin_net:
+    external: true
+```
+
+## NGINX Configuration
+
+```nginx
+# Subdomain routing
+map $host $site_folder {
+    ~^(?<subdomain>.+)\.kylehub\.dev$ $subdomain;
+    default "kyle";
+}
+
+server {
+    listen 80;
+    server_name *.kylehub.dev;
+
+    root /usr/share/nginx/html/$site_folder;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Security headers
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+
+    # Cache static assets
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
 }
 ```
 
-### Site
+## Workflow: Creating a New Site
 
-```typescript
-interface Site {
-  id: string;
-  userId: string;          // Owner
-  subdomain: string;       // e.g., "yuna" → yuna.kylehub.dev
-  customDomain?: string;   // e.g., "yunasoul.de" (optional)
-  template: 'linktree' | 'portfolio';
-  config: SiteConfig;      // Template-specific config (JSONB)
-  theme: ThemeConfig;
-  published: boolean;
-  publishedAt?: Date;
-  createdAt: Date;
-  updatedAt: Date;
-}
+### 1. Copy Template
+
+```bash
+cp -r templates/base-astro sites/newsite
+cd sites/newsite
+pnpm install
 ```
 
-### SiteConfig (Linktree)
+### 2. Customize with AI
 
-```typescript
-interface LinktreeSiteConfig {
-  profile: {
-    name: string;
-    bio: string;
-    avatarUrl: string;
-  };
-  links: Array<{
-    id: string;
-    label: string;
-    url: string;
-    icon?: string;
-  }>;
-  socials: Array<{
-    platform: 'twitter' | 'instagram' | 'github' | 'discord' | 'spotify';
-    url: string;
-  }>;
-  embeds?: Array<{
-    type: 'spotify' | 'youtube' | 'soundcloud';
-    embedId: string;
-  }>;
-}
+Use AI coding assistant to:
+- Generate unique layouts and components
+- Apply custom Tailwind styling
+- Add React/Svelte islands if needed
+
+### 3. Build
+
+```bash
+pnpm run build
+# Output: sites/newsite/dist/
 ```
 
-### ThemeConfig
+### 4. Deploy
 
-```typescript
-interface ThemeConfig {
-  preset?: string;         // e.g., "dark-purple", "light-minimal"
-  background: {
-    type: 'solid' | 'gradient' | 'image';
-    value: string;         // Color, gradient CSS, or image URL
-  };
-  colors: {
-    primary: string;
-    secondary: string;
-    text: string;
-    accent: string;
-  };
-  font: string;            // Google Font name
-  borderRadius: 'none' | 'sm' | 'md' | 'lg' | 'full';
-}
+```bash
+# Add volume to docker-compose.yml
+# Restart NGINX container
+docker compose up -d
 ```
 
-## Key Architectural Patterns
+## Content Management (The Trade-off)
 
-### Dual-Context Components
+Dropping a full CMS means friends can't self-edit content. Solutions:
 
-Components in `packages/blocks` are used in two contexts:
-1. **Editor Context**: Wrapped with drag-and-drop handlers, overlay controls
-2. **Renderer Context**: Pure HTML/CSS output, no editor overhead
+### Option 1: Webmaster Model
 
-This is solved by the monorepo — same source code, different build targets.
+You are the webmaster. Friends text you changes, you use AI to apply the diff, you push.
 
-### Live Preview
+### Option 2: Git-based CMS (Future)
 
-Uses **SSR iframe preview** (not client-side mock):
-1. User edits in Puck editor
-2. Changes debounced and sent to `/api/preview`
-3. Astro SSR renders actual HTML
-4. Iframe displays the real output
+If self-service editing becomes necessary, integrate a Git-based CMS:
 
-This ensures WYSIWYG accuracy.
+| Option | Description |
+|--------|-------------|
+| [Keystatic](https://keystatic.com) | Local/cloud editor, saves to JSON/Markdown |
+| [Decap CMS](https://decapcms.org) | Browser-based, saves to Git |
 
-### Build Engine
-
-The renderer is invoked programmatically:
-1. Dashboard spawns child process
-2. `astro build` runs with `SITE_ID` env var
-3. Catch-all route fetches config from database
-4. Static `dist/` folder is generated
-5. ZIP for download or push to Git for deployment
-
-### Dynamic Subdomain Routing
-
-Nginx/Traefik `map` directive handles subdomains without config reloads:
-- `alice.grimoire.kylehub.dev` → `/var/www/sites/alice`
-- Custom domains via Traefik with auto Let's Encrypt
-
-## API Endpoints
-
-```
-GET    /api/sites              # List user's sites
-POST   /api/sites              # Create new site
-GET    /api/sites/:id          # Get site config
-PUT    /api/sites/:id          # Update site config
-DELETE /api/sites/:id          # Delete site
-
-POST   /api/sites/:id/build    # Trigger build
-GET    /api/sites/:id/download # Download ZIP
-
-POST   /api/preview            # SSR preview endpoint
-
-GET    /api/templates          # List available templates
-GET    /api/templates/:id      # Get template info
-```
+These require **zero database** and **zero backend hosting** — they fit perfectly into the static workflow.
 
 ## Security Considerations
 
 | Risk | Mitigation |
 |------|------------|
-| XSS in user content | DOMPurify sanitization at build time |
-| SVG script injection | Strip `<script>` and `on*` attributes |
-| Cookie scope | `SameSite=Lax`, don't scope to wildcard |
-| IDOR attacks | Middleware validates `org_id` on every request |
-| M2M auth | Service Users with JWT Profile |
+| No database to hack | ✅ Static files only |
+| No admin panel | ✅ No brute-force target |
+| XSS in content | DOMPurify at build time (if accepting user input) |
+| DDOS | Pangolin rate limiting, NGINX cache headers |
 
-## Deployment Flow
+## Advantages of This Architecture
 
-### v1: Manual ZIP Download
+1. **AI Synergy**: AI assistants excel at writing code (Astro, Tailwind), not configuring CMS schemas
+2. **Performance**: NGINX uses minimal RAM; no Node.js runtime
+3. **True Customization**: Each site is a blank canvas — use React, Svelte, or plain HTML
+4. **Security**: No database, no admin panel, minimal attack surface
+5. **Cost**: Near-zero hosting costs for static files
+6. **Simplicity**: From "Platform Maintainer" to "Creative Director"
 
-```
-User saves site → Build triggered → ZIP generated → User downloads → Manual deploy
-```
+## Future Considerations
 
-### v2: Automated Pipeline
-
-```
-User clicks "Publish"
-      ↓
-Backend pushes to Git (user's repo)
-      ↓
-Git webhook triggers CI/CD
-      ↓
-CI/CD builds and deploys to tunnel endpoint
-      ↓
-Reverse proxy routes subdomain → tunnel
-      ↓
-Site is live!
-```
+- **Automated builds**: GitHub Actions or Forgejo CI to build on push
+- **Preview deployments**: Feature branches → preview URLs
+- **Shared component library**: Publish `packages/ui` to private npm registry

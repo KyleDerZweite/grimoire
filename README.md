@@ -1,91 +1,68 @@
 # Grimoire
 
-A self-hosted website builder for creating linktree-style and portfolio pages. Built as part of the KyleHub ecosystem.
+A **Static Site Factory** for creating beautiful, bespoke websites for friends and personal use. Built with Astro, Tailwind, and AI-assisted development.
 
 ## What is Grimoire?
 
-Grimoire is a free, self-hosted alternative to Carrd, Beacons, and Linktree. Users authenticate, customize their site through a form-based editor with live preview, and publish to their own subdomain.
+Grimoire is a monorepo workflow for rapidly creating and deploying static websites. Using AI coding assistants, each site is a unique Astro project — a blank canvas with unlimited creative freedom.
 
-**Target output**: Static Astro sites with React islands for interactive elements.
+**Output**: Static Astro sites served via NGINX.
 
 ## Status
 
-**In Planning** — Architecture finalized, ready for implementation.
+**In Development** — Architecture finalized, ready for implementation.
 
 ## Documentation
 
 | Document | Description |
 |----------|-------------|
-| [Vision](docs/VISION.md) | Project goals, scope, and phasing |
-| [Architecture](docs/ARCHITECTURE.md) | Technical design and data models |
-
-## Features (Planned)
-
-### Phase 1: MVP
-- User authentication (OIDC)
-- Form-based site editor with Puck
-- Live SSR preview
-- Linktree-style template
-- Export as downloadable ZIP
-
-### Phase 2: Auto-Deploy
-- Push-button publishing
-- Git integration (Forgejo) for versioning
-- CI/CD pipeline with act_runner
-- Subdomain routing
-
-### Phase 3: Advanced
-- Portfolio template
-- Spotify/YouTube embeds
-- Resume download
-- Custom domain support
-
-## Tech Stack
-
-| Component | Technology |
-|-----------|------------|
-| Dashboard | Astro + React (SSR) |
-| Visual Editor | Puck |
-| Build Engine | Astro (Static) |
-| Database | PostgreSQL + Drizzle |
-| Auth | OIDC Provider (PKCE) |
-| Git Server | Forgejo |
-| CI/CD | act_runner |
-| Output | Static Astro sites |
+| [Vision](docs/VISION.md) | Project philosophy and scope |
+| [Architecture](docs/ARCHITECTURE.md) | Technical design and deployment |
 
 ## Project Structure
 
 ```
 grimoire/
-├── apps/
-│   ├── dashboard/     # Admin + Visual Editor
-│   └── renderer/      # Static site generator
 ├── packages/
-│   ├── ui/            # Design system
-│   ├── blocks/        # Site components
-│   ├── database/      # Drizzle schema
-│   └── auth/          # OIDC utilities
-├── docs/              # Documentation
-└── research/          # Research documents
+│   └── ui/              # Shared Tailwind components
+├── templates/
+│   └── base-astro/      # Blueprint for new sites
+├── sites/
+│   ├── kyle/            # Kyle's portfolio
+│   ├── sarah/           # Friend A's linktree
+│   └── tom/             # Friend B's business site
+├── docker-compose.yml   # NGINX deployment
+├── nginx.conf           # Subdomain routing
+└── docs/                # Documentation
 ```
 
-## KyleHub Infrastructure
+## Tech Stack
 
-Grimoire is a KyleHub-native application, leveraging:
+| Component | Technology |
+|-----------|------------|
+| Site Generator | Astro |
+| Styling | Tailwind CSS |
+| Web Server | NGINX Alpine |
+| Tunnel | Newt → Pangolin |
+| Development | AI-assisted (Cursor, Copilot, etc.) |
 
-- **OIDC Provider** for authentication
-- **PostgreSQL** for data storage
-- **Reverse Proxy + Tunnels** for deployment and routing
-- **Forgejo** for version control
+## Workflow
 
-## Contributing
+1. **Copy template**: `cp -r templates/base-astro sites/newsite`
+2. **Customize with AI**: Generate unique layouts and components
+3. **Build**: `pnpm run build`
+4. **Deploy**: Add volume to Docker, restart NGINX
 
-Contributions are welcome! Please read our contributing guidelines before submitting PRs.
+## Advantages
+
+- **AI Synergy**: AI excels at writing code, not configuring CMS schemas
+- **Lightweight**: NGINX uses minimal RAM; no runtime dependencies
+- **Secure**: No database to hack, no admin panel to brute-force
+- **Unlimited Customization**: Each site is a blank canvas
+- **Near-Zero Cost**: Static files are cheap to host
 
 ## License
 
 This project is licensed under the [GNU Affero General Public License v3.0](https://www.gnu.org/licenses/agpl-3.0.html).
-
-If you modify and deploy this software, you must make your source code available to users.
 
 Copyright 2026 [KyleDerZweite](https://github.com/KyleDerZweite)

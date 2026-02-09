@@ -1,0 +1,17 @@
+---
+// Hero.astro — Example component stub
+// TODO: Design a hero section for this site
+
+interface Props {
+  heading: string;
+  subheading?: string;
+}
+
+const { heading, subheading } = Astro.props;
+---
+
+<section>
+  <h1>{heading}</h1>
+  {subheading && <p>{subheading}</p>}
+  <!-- TODO: Add hero content, images, CTAs -->
+</section>

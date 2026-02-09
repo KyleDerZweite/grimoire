@@ -2,70 +2,79 @@
 
 ## Overview
 
-Grimoire is a self-hosted website builder that allows users to create beautiful linktree-style and portfolio pages through a form-based editor with real-time preview. It serves as a free, self-hosted alternative to services like Carrd and Beacons.
+Grimoire is a **Static Site Factory** — a streamlined workflow for generating bespoke static websites for friends and personal use. Using AI-assisted coding, each site is built as a unique Astro project with zero ongoing maintenance overhead.
+
+## Why This Works
+
+1. **AI Synergy**: AI coding assistants excel at writing Astro/Tailwind code
+2. **Lightweight**: NGINX Alpine serves static files with minimal resources
+3. **Security**: No database, no admin panel — minimal attack surface
+4. **True Customization**: Every site is a blank canvas
 
 ## Target Users
 
 | User Type | Needs | Example |
 |-----------|-------|---------|
-| Friends (Primary) | Free Carrd/Beacons replacement with simple linktree pages | Links, profile pic, Spotify embed |
-| Developer (Kyle) | Portfolio with more depth — projects, resume, embeds | Future scope, architecture should support it |
+| Friends | Free Carrd/Beacons replacement | Links, profile pic, Spotify embed |
+| Kyle | Portfolio with depth | Projects, resume, embeds |
+| Future friends | Unique business sites | Whatever they want |
 
 ## Core Value Proposition
 
-> A self-hosted platform where users authenticate, customize their site via forms, preview in real-time, and publish to their own subdomain — without paying for Carrd Pro or similar services.
+> A monorepo workflow where you use AI to rapidly create beautiful, performant static sites for friends — deployed via NGINX and managed as code.
 
-## Scope per Phase
+## What Grimoire Is
 
-### Phase 1: MVP — "Better Free Carrd"
+- A **monorepo** containing all friend sites
+- A **template system** for rapidly spinning up new Astro projects
+- A **shared component library** for consistent styling
+- A **deployment workflow** via NGINX + Pangolin
 
-**Goal**: Friends can create a linktree-style page and download it as a deployable ZIP.
+## What Grimoire Is NOT
 
-| Component | Description |
-|-----------|-------------|
-| Landing Page | Simple "What is Grimoire?" at `grimoire.kylehub.dev` |
-| Auth | Zitadel login (OIDC/PKCE) |
-| Dashboard | User sees their site(s), can create/edit |
-| Editor | Form-based: name, bio, avatar, list of links, theme |
-| Preview | Live preview showing their page as they edit |
-| Export | Download button → ZIP with complete Astro project |
-
-**Deployment (v1)**: Manual — take ZIP, deploy via Pangolin/Newt tunnel.
-
-### Phase 2: Auto-Deploy Pipeline
-
-**Goal**: Push-button deployment to subdomains.
-
-| Component | Description |
-|-----------|-------------|
-| Internal Git | Gitea instance, each user gets a repo |
-| CI/CD | On save/publish → build Astro → deploy |
-| Pangolin Integration | Auto-create resource, configure Newt tunnel |
-| Subdomain Routing | `yuna.grimoire.kylehub.dev` works automatically |
-
-### Phase 3: Advanced Features
-
-**Goal**: Portfolio pages, custom domains.
-
-| Feature | Description |
-|---------|-------------|
-| Portfolio Template | Multi-section: about, projects, resume, contact |
-| Resume Download | PDF upload + styled download button |
-| Embeds | Spotify, YouTube, GitHub stats, etc. |
-| Custom Domains | User brings domain, shown DNS instructions |
-| Theme Customization | Color schemes, fonts, layouts |
-
-## What Grimoire Will Never Be
-
-- A full CMS or blog platform
-- A drag-and-drop page builder (too complex)
-- A generic website hosting service
+- A CMS or database-backed platform
+- A self-service platform where friends edit their own content
 - Enterprise software
+- A Wix/Squarespace/Carrd clone
+
+## Content Updates: The Webmaster Model
+
+Since there's no CMS, you are the webmaster:
+
+1. Friend texts you: "Can you change my bio?"
+2. You use AI to update the code
+3. You push to Git and rebuild
+4. Site is updated
+
+If this becomes a bottleneck, integrate a Git-based CMS like **Keystatic** or **Decap CMS** — zero database, zero backend.
 
 ## Design Principles
 
-1. **Simple over Complex** — Form-based editing, not visual drag-and-drop
-2. **Static over Dynamic** — Output is Astro static sites, fast and cheap to host
-3. **Modular from Day 1** — Architecture supports adding features without rewrites
-4. **KyleHub-Native First** — Leverage existing infrastructure, portability is a future concern
-5. **Fun and Learning** — This is a passion project, not production enterprise software
+1. **Code over Configuration** — Write actual code, not CMS configs
+2. **AI-Assisted Development** — Leverage coding assistants for rapid iteration
+3. **Static over Dynamic** — Output is HTML/CSS/JS, fast and cheap to host
+4. **Monorepo for Consistency** — Shared components, consistent tooling
+5. **Fun and Learning** — This is a creative outlet, not enterprise software
+
+## Scope
+
+### Now: Foundation
+
+- Monorepo structure with PNPM workspaces
+- Base Astro template
+- Shared UI components (Tailwind-based)
+- NGINX + Docker deployment
+- Documentation
+
+### Soon: First Sites
+
+- Kyle's portfolio site
+- First friend sites (linktree-style)
+- Refined template and components
+
+### Later: Enhancements
+
+- Automated builds (CI/CD)
+- Preview deployments
+- Git-based CMS integration (if needed)
+- Additional templates

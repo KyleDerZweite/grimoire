@@ -1,0 +1,4 @@
+# sites/
+# Each subdirectory is a standalone Astro site.
+# Create a new site: pnpm run new-site <name>
+# Or manually: cp -r templates/base-astro sites/<name>

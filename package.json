@@ -1,0 +1,20 @@
+{
+  "name": "grimoire",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A Static Site Factory for creating beautiful, bespoke websites",
+  "license": "AGPL-3.0-or-later",
+  "author": "KyleDerZweite",
+  "scripts": {
+    "build": "pnpm -r --filter './sites/**' run build",
+    "build:ui": "pnpm --filter @grimoire/ui run build",
+    "dev": "echo 'Usage: pnpm --filter sites/<name> dev'",
+    "new-site": "bash scripts/new-site.sh",
+    "lint": "pnpm -r run lint",
+    "clean": "pnpm -r run clean"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  }
+}

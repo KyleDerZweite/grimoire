@@ -1,0 +1,27 @@
+services:
+  # The Traffic Director — serves all static sites
+  router:
+    image: nginx:alpine
+    container_name: grimoire_router
+    restart: unless-stopped
+    volumes:
+      # Mount built sites into NGINX html directory
+      # Add new sites here: ./sites/<name>/dist:/usr/share/nginx/html/<name>
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - pangolin_net
+
+  # The Network Connector — tunnels traffic from Pangolin
+  newt:
+    image: fosrl/newt:latest
+    container_name: grimoire_newt
+    restart: unless-stopped
+    environment:
+      - PANGOLIN_ENDPOINT=${PANGOLIN_ENDPOINT}
+      - NEWT_ID=${NEWT_ID}
+      - NEWT_SECRET=${NEWT_SECRET}
+    network_mode: service:router
+
+networks:
+  pangolin_net:
+    external: true
