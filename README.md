@@ -60,6 +60,6 @@ grimoire/
 
 ## License
 
-Source code is licensed under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0). All creative assets (artwork, images, graphics) are **All Rights Reserved** — see [LICENSE](LICENSE) for details.
+Source code is licensed under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0). All creative assets (artwork, images, graphics) are **All Rights Reserved** - see [LICENSE](LICENSE) for details.
 
 Copyright 2026 [KyleDerZweite](https://github.com/KyleDerZweite)

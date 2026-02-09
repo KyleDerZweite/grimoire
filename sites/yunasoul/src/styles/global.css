@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════
-   YUNA'S APOTHECARY — Design Tokens
+   YUNA'S APOTHECARY - Design Tokens
    ═══════════════════════════════════════════════ */
 :root {
-  /* Palette — deep amethyst nights */
+  /* Palette - deep amethyst nights */
   --clr-void: #07021a;
   --clr-deep: #0e0528;
   --clr-surface: rgba(20, 8, 45, 0.75);
