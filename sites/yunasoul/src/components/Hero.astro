@@ -1,0 +1,77 @@
+---
+// Hero.astro — Reusable hero section with optional avatar
+
+interface Props {
+  heading: string;
+  subheading?: string;
+  avatarSrc?: string;
+  avatarInitial?: string;
+}
+
+const { heading, subheading, avatarSrc, avatarInitial } = Astro.props;
+---
+
+<section class="hero-section">
+  {(avatarSrc || avatarInitial) && (
+    <div class="hero-avatar-wrapper">
+      {avatarSrc ? (
+        <img src={avatarSrc} alt={heading} class="hero-avatar" width="80" height="80" />
+      ) : (
+        <div class="hero-avatar hero-avatar--initial">
+          <span>{avatarInitial}</span>
+        </div>
+      )}
+    </div>
+  )}
+  <h1 class="hero-heading">{heading}</h1>
+  {subheading && <p class="hero-subheading">{subheading}</p>}
+  <slot />
+</section>
+
+<style>
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-avatar-wrapper {
+    margin-bottom: 16px;
+  }
+
+  .hero-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .hero-avatar--initial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-accent, #BF6D4A) 0%, #D4956E 100%);
+    color: #fff;
+    font-family: var(--font-display, Georgia), serif;
+    font-size: 2rem;
+    font-style: italic;
+  }
+
+  .hero-heading {
+    font-family: var(--font-display, Georgia), serif;
+    font-size: 1.75rem;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .hero-subheading {
+    margin-top: 8px;
+    font-size: 0.925rem;
+    font-weight: 300;
+    color: var(--color-text-muted, #7D7671);
+    line-height: 1.5;
+  }
+</style>
