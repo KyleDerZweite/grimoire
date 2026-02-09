@@ -23,14 +23,11 @@ Grimoire is a monorepo workflow for rapidly creating and deploying static websit
 
 ```
 grimoire/
-├── packages/
-│   └── ui/              # Shared Tailwind components
 ├── templates/
 │   └── base-astro/      # Blueprint for new sites
 ├── sites/
-│   ├── kyle/            # Kyle's portfolio
-│   ├── sarah/           # Friend A's linktree
-│   └── tom/             # Friend B's business site
+│   ├── sircookie/       # Sir.Cookie's link page
+│   └── yunasoul/        # YunaSoul's link page
 ├── docker-compose.yml   # NGINX deployment
 ├── nginx.conf           # Subdomain routing
 └── docs/                # Documentation
@@ -63,6 +60,6 @@ grimoire/
 
 ## License
 
-This project is licensed under the [GNU Affero General Public License v3.0](https://www.gnu.org/licenses/agpl-3.0.html).
+Source code is licensed under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0). All creative assets (artwork, images, graphics) are **All Rights Reserved** — see [LICENSE](LICENSE) for details.
 
 Copyright 2026 [KyleDerZweite](https://github.com/KyleDerZweite)

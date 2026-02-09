@@ -25,20 +25,19 @@ Grimoire is a **Static Site Factory** - a streamlined workflow for generating be
                           │
           ┌───────────────┼───────────────┐
           ▼               ▼               ▼
-    ┌──────────┐    ┌──────────┐    ┌──────────┐
-    │  kyle/   │    │  sarah/  │    │   tom/   │
-    │  dist/   │    │  dist/   │    │  dist/   │
-    └──────────┘    └──────────┘    └──────────┘
+    ┌────────────┐  ┌────────────┐  ┌──────────┐
+    │ sircookie/ │  │ yunasoul/  │  │  etc./   │
+    │   dist/    │  │   dist/    │  │  dist/   │
+    └────────────┘  └────────────┘  └──────────┘
 ```
 
 ## URL & Domain Structure
 
 | URL | Purpose |
 |-----|---------|
-| `kyle.kylehub.dev` | Kyle's personal site |
-| `sarah.kylehub.dev` | Friend A (Linktree style) |
-| `tom.kylehub.dev` | Friend B (Complex business site) |
-| `kylesoul.de` | Custom domain (points to kyle's site) |
+| `sircookie.kylehub.dev` | Sir.Cookie's link page |
+| `yunasoul.kylehub.dev` | YunaSoul's link page |
+| `kylesoul.de` | Custom domain example |
 
 ### Routing Logic
 
@@ -79,14 +78,6 @@ grimoire/
 ├── docker-compose.yml           # NGINX Router
 ├── nginx.conf                   # Subdomain routing config
 │
-├── packages/
-│   └── ui/                      # Shared Tailwind components
-│       ├── src/
-│       │   ├── Button.astro
-│       │   ├── Card.astro
-│       │   └── index.ts
-│       └── package.json
-│
 ├── templates/
 │   └── base-astro/              # Blueprint for new projects
 │       ├── src/
@@ -94,21 +85,15 @@ grimoire/
 │       │   ├── pages/
 │       │   └── components/
 │       ├── astro.config.mjs
-│       ├── tailwind.config.mjs
 │       └── package.json
 │
 ├── sites/
-│   ├── kyle/                    # Kyle's portfolio
+│   ├── sircookie/               # Sir.Cookie's link page
 │   │   ├── src/
 │   │   ├── dist/                # Built output
 │   │   └── package.json
 │   │
-│   ├── sarah/                   # Friend A (Linktree style)
-│   │   ├── src/
-│   │   ├── dist/
-│   │   └── package.json
-│   │
-│   └── tom/                     # Friend B (Business site)
+│   └── yunasoul/                # YunaSoul's link page
 │       ├── src/
 │       ├── dist/
 │       └── package.json
@@ -127,9 +112,8 @@ services:
     restart: unless-stopped
     volumes:
       # Map all built sites to the Nginx html folder
-      - ./sites/kyle/dist:/usr/share/nginx/html/kyle
-      - ./sites/sarah/dist:/usr/share/nginx/html/sarah
-      - ./sites/tom/dist:/usr/share/nginx/html/tom
+      - ./sites/sircookie/dist:/usr/share/nginx/html/sircookie
+      - ./sites/yunasoul/dist:/usr/share/nginx/html/yunasoul
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       - pangolin_net

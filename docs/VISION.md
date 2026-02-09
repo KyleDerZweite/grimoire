@@ -16,8 +16,9 @@ Grimoire is a **Static Site Factory** - a streamlined workflow for generating be
 | User Type | Needs | Example |
 |-----------|-------|---------|
 | Friends | Free Carrd/Beacons replacement | Links, profile pic, Spotify embed |
-| Kyle | Portfolio with depth | Projects, resume, embeds |
-| Future friends | Unique business sites | Whatever they want |
+| Sir.Cookie | Link-in-bio page | Midnight Frost theme |
+| YunaSoul | Link-in-bio page | Enchanted Apothecary theme |
+| Future friends | Unique sites | Whatever they want |
 
 ## Core Value Proposition
 

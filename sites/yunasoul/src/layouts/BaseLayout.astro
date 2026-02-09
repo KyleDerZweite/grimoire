@@ -1,5 +1,5 @@
 ---
-// BaseLayout.astro - Link-in-bio page shell
+// BaseLayout.astro — Enchanted Apothecary shell
 
 interface Props {
   title: string;
@@ -7,7 +7,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description = 'My links', ogImage } = Astro.props;
+const { title, description = 'Links & more', ogImage } = Astro.props;
 ---
 
 <!doctype html>
@@ -19,23 +19,23 @@ const { title, description = 'My links', ogImage } = Astro.props;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {ogImage && <meta property="og:image" content={ogImage} />}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <title>{title}</title>
 
-    <!-- Fonts: Fraunces (display serif) + Outfit (geometric sans) -->
+    <!-- Fonts: Cormorant Garamond (enchanting display) + Nunito (warm body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Outfit:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,600;1,700&family=Nunito:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
-    <style>
+    <style is:global>
       @import "../styles/global.css";
     </style>
   </head>
   <body>
-    <div class="grain-overlay" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
     <slot />
   </body>
 </html>
