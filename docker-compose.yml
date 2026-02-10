@@ -35,10 +35,6 @@ services:
     image: docker.io/fosrl/newt:latest
     container_name: grimoire_newt
     restart: unless-stopped
-    cap_add:
-      - NET_ADMIN
-    devices:
-      - /dev/net/tun:/dev/net/tun
     environment:
       - PANGOLIN_ENDPOINT=${PANGOLIN_ENDPOINT}
       - NEWT_ID=${NEWT_ID}
