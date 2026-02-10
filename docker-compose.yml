@@ -18,6 +18,8 @@ services:
     image: nginx:alpine
     container_name: grimoire_router
     restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"
     volumes:
       # Mount built sites into NGINX html directory
       # Add new sites here: ./sites/<name>/dist:/usr/share/nginx/html/<name>
@@ -35,6 +37,7 @@ services:
     image: fosrl/newt:latest
     container_name: grimoire_newt
     restart: unless-stopped
+    network_mode: host
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
@@ -44,8 +47,6 @@ services:
       - PANGOLIN_ENDPOINT=${PANGOLIN_ENDPOINT}
       - NEWT_ID=${NEWT_ID}
       - NEWT_SECRET=${NEWT_SECRET}
-    networks:
-      - pangolin_net
     depends_on:
       - router
 
