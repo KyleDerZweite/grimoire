@@ -1,4 +1,18 @@
 services:
+  # The Build Engine - pulls & rebuilds sites on a schedule
+  builder:
+    build:
+      context: .
+      dockerfile: Dockerfile.builder
+    container_name: grimoire_builder
+    restart: unless-stopped
+    volumes:
+      - .:/app:z
+    environment:
+      - BUILD_INTERVAL=${BUILD_INTERVAL:-7200}
+      - GIT_BRANCH=${GIT_BRANCH:-main}
+      - BUILD_ON_START=${BUILD_ON_START:-true}
+
   # The Traffic Director - serves all static sites
   router:
     image: nginx:alpine
@@ -13,6 +27,9 @@ services:
       - ./sites/yunasoul/dist:/usr/share/nginx/html/yunasoul:ro,z
     networks:
       - pangolin_net
+    depends_on:
+      builder:
+        condition: service_started
 
   # The Network Connector - tunnels traffic from Pangolin
   newt:

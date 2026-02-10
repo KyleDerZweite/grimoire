@@ -105,18 +105,34 @@ grimoire/
 
 ```yaml
 services:
+  # The Build Engine - pulls & rebuilds on a schedule
+  builder:
+    build:
+      context: .
+      dockerfile: Dockerfile.builder
+    container_name: grimoire_builder
+    restart: unless-stopped
+    volumes:
+      - .:/app:z
+    environment:
+      - BUILD_INTERVAL=${BUILD_INTERVAL:-300}
+      - GIT_BRANCH=${GIT_BRANCH:-main}
+      - BUILD_ON_START=${BUILD_ON_START:-true}
+
   # The Traffic Director
   router:
     image: nginx:alpine
     container_name: grimoire_router
     restart: unless-stopped
     volumes:
-      # Map all built sites to the Nginx html folder
       - ./sites/sircookie/dist:/usr/share/nginx/html/sircookie
       - ./sites/yunasoul/dist:/usr/share/nginx/html/yunasoul
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       - pangolin_net
+    depends_on:
+      builder:
+        condition: service_started
 
   # The Network Connector (Newt)
   newt:
@@ -127,12 +143,30 @@ services:
       - PANGOLIN_ENDPOINT=https://pangolin.kylehub.dev
       - NEWT_ID=${NEWT_ID}
       - NEWT_SECRET=${NEWT_SECRET}
-    network_mode: service:router
+    networks:
+      - pangolin_net
+    depends_on:
+      - router
 
 networks:
   pangolin_net:
     external: true
 ```
+
+### Builder Service
+
+The `builder` container handles continuous deployment:
+
+1. On startup: runs `pnpm install && pnpm build` to ensure `dist/` folders exist
+2. Every `BUILD_INTERVAL` seconds (default 300 = 5 min): fetches from git
+3. If new commits detected: pulls changes and rebuilds all sites
+4. NGINX serves updated files immediately (no restart needed)
+
+| Environment Variable | Default | Description |
+|---------------------|---------|-------------|
+| `BUILD_INTERVAL` | `7200` | Seconds between git fetch checks (2 hours) |
+| `GIT_BRANCH` | `main` | Branch to track |
+| `BUILD_ON_START` | `true` | Build immediately on container start |
 
 ## NGINX Configuration
 
@@ -194,9 +228,11 @@ pnpm run build
 ### 4. Deploy
 
 ```bash
-# Add volume to docker-compose.yml
-# Restart NGINX container
-docker compose up -d
+# 1. Add volume to docker-compose.yml for the new site
+# 2. Push to git - the builder will auto-pull and rebuild
+git add . && git commit -m "Add newsite" && git push
+# Or force a manual rebuild:
+docker compose restart builder
 ```
 
 ## Content Management (The Trade-off)
@@ -236,8 +272,35 @@ These require **zero database** and **zero backend hosting** - they fit perfectl
 5. **Cost**: Near-zero hosting costs for static files
 6. **Simplicity**: From "Platform Maintainer" to "Creative Director"
 
+## Server Deployment
+
+### Initial Setup (one-time)
+
+```bash
+# 1. Clone the repo on your server
+git clone https://github.com/your-user/grimoire.git
+cd grimoire
+
+# 2. Create your .env file
+cp .env.example .env
+# Edit .env with your Pangolin credentials
+
+# 3. Start everything
+docker compose up -d
+```
+
+That's it. The builder container handles everything from here:
+- Builds all sites on first start
+- Checks for git updates every 2 hours
+- Rebuilds automatically when changes are detected
+
+### Updating
+
+Just push to the tracked branch. The builder picks up changes automatically.
+To force an immediate rebuild: `docker compose restart builder`
+
 ## Future Considerations
 
-- **Automated builds**: GitHub Actions or Forgejo CI to build on push
+- **GitHub webhook trigger**: Replace polling with instant webhook-triggered builds
 - **Preview deployments**: Feature branches → preview URLs
 - **Shared component library**: Publish `packages/ui` to private npm registry
