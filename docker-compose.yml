@@ -15,7 +15,7 @@ services:
 
   # The Traffic Director - serves all static sites
   router:
-    image: nginx:alpine
+    image: docker.io/library/nginx:alpine
     container_name: grimoire_router
     restart: unless-stopped
     volumes:
@@ -32,7 +32,7 @@ services:
 
   # The Network Connector - tunnels traffic from Pangolin
   newt:
-    image: fosrl/newt:latest
+    image: docker.io/fosrl/newt:latest
     container_name: grimoire_newt
     restart: unless-stopped
     environment:
