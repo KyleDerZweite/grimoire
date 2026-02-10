@@ -56,6 +56,7 @@ Grimoire is a **Static Site Factory** - a streamlined workflow for generating be
 
 | Layer | Technology | Rationale |
 |-------|------------|-----------|
+| Containers | Podman + podman-compose | Daemonless, rootless container runtime |
 | Reverse Proxy | Pangolin | Existing KyleHub infrastructure |
 | Network Bridge | Newt | Secure tunnel from Pangolin to local NGINX |
 | Web Server | NGINX Alpine | Minimal RAM, serves static files |
@@ -75,7 +76,7 @@ Grimoire is a **Static Site Factory** - a streamlined workflow for generating be
 grimoire/
 ├── package.json                 # PNPM workspace config
 ├── pnpm-workspace.yaml
-├── docker-compose.yml           # NGINX Router
+├── docker-compose.yml           # Podman compose stack
 ├── nginx.conf                   # Subdomain routing config
 │
 ├── templates/
@@ -101,7 +102,7 @@ grimoire/
 └── docs/                        # Documentation
 ```
 
-## Docker Deployment
+## Podman Deployment
 
 ```yaml
 services:
@@ -109,7 +110,7 @@ services:
   builder:
     build:
       context: .
-      dockerfile: Dockerfile.builder
+      dockerfile: Containerfile.builder
     container_name: grimoire_builder
     restart: unless-stopped
     volumes:
@@ -232,7 +233,7 @@ pnpm run build
 # 2. Push to git - the builder will auto-pull and rebuild
 git add . && git commit -m "Add newsite" && git push
 # Or force a manual rebuild:
-docker compose restart builder
+podman-compose restart builder
 ```
 
 ## Content Management (The Trade-off)
@@ -286,7 +287,7 @@ cp .env.example .env
 # Edit .env with your Pangolin credentials
 
 # 3. Start everything
-docker compose up -d
+podman-compose up -d
 ```
 
 That's it. The builder container handles everything from here:
@@ -297,7 +298,7 @@ That's it. The builder container handles everything from here:
 ### Updating
 
 Just push to the tracked branch. The builder picks up changes automatically.
-To force an immediate rebuild: `docker compose restart builder`
+To force an immediate rebuild: `podman-compose restart builder`
 
 ## Future Considerations
 

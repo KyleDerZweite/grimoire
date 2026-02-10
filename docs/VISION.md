@@ -7,7 +7,7 @@ Grimoire is a **Static Site Factory** - a streamlined workflow for generating be
 ## Why This Works
 
 1. **AI Synergy**: AI coding assistants excel at writing Astro/Tailwind code
-2. **Lightweight**: NGINX Alpine serves static files with minimal resources
+- **Lightweight**: NGINX Alpine on Podman serves static files with minimal resources
 3. **Security**: No database, no admin panel - minimal attack surface
 4. **True Customization**: Every site is a blank canvas
 
@@ -29,7 +29,7 @@ Grimoire is a **Static Site Factory** - a streamlined workflow for generating be
 - A **monorepo** containing all friend sites
 - A **template system** for rapidly spinning up new Astro projects
 - A **shared component library** for consistent styling
-- A **deployment workflow** via NGINX + Pangolin
+- A **deployment workflow** via Podman + NGINX + Pangolin
 
 ## What Grimoire Is NOT
 
@@ -64,7 +64,7 @@ If this becomes a bottleneck, integrate a Git-based CMS like **Keystatic** or **
 - Monorepo structure with PNPM workspaces
 - Base Astro template
 - Shared UI components (Tailwind-based)
-- NGINX + Docker deployment
+- NGINX + Podman deployment
 - Documentation
 
 ### Soon: First Sites

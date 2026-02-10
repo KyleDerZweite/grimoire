@@ -28,7 +28,7 @@ grimoire/
 ├── sites/
 │   ├── sircookie/       # Sir.Cookie's link page
 │   └── yunasoul/        # YunaSoul's link page
-├── docker-compose.yml   # NGINX deployment
+├── docker-compose.yml   # Podman compose deployment
 ├── nginx.conf           # Subdomain routing
 └── docs/                # Documentation
 ```
@@ -39,6 +39,7 @@ grimoire/
 |-----------|------------|
 | Site Generator | Astro |
 | Styling | Tailwind CSS |
+| Containers | Podman + podman-compose |
 | Web Server | NGINX Alpine |
 | Tunnel | Newt → Pangolin |
 | Development | AI-assisted (Cursor, Copilot, etc.) |
@@ -48,7 +49,7 @@ grimoire/
 1. **Copy template**: `cp -r templates/base-astro sites/newsite`
 2. **Customize with AI**: Generate unique layouts and components
 3. **Build**: `pnpm run build`
-4. **Deploy**: Add volume to Docker, restart NGINX
+4. **Deploy**: Add volume to docker-compose.yml, `podman-compose up -d`
 
 ## Advantages
 
