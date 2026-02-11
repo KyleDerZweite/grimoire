@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "A Static Site Factory for creating beautiful, bespoke websites",
-  "license": "AGPL-3.0-or-later",
+  "license": "SEE LICENSE IN LICENSE.md",
   "author": "KyleDerZweite",
   "scripts": {
     "build": "pnpm -r --filter './sites/**' run build",

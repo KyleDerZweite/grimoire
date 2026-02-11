@@ -146,3 +146,11 @@ The PolyForm Noncommercial License above applies ONLY to the
 source code (including HTML, CSS, JavaScript, TypeScript,
 configuration files, and build scripts) and does NOT extend to
 any Creative Asset.
+
+## Template - No Copyright Claimed
+
+The contents of the `templates/` directory were generated entirely
+by AI (Claude, Anthropic) without meaningful human creative input.
+No copyright is claimed over these files. They are provided as-is
+and may be freely used, modified, and distributed by anyone for
+any purpose without restriction.
