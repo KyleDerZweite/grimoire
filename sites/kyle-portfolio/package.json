@@ -1,0 +1,19 @@
+{
+  "name": "@grimoire/site-kyle-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "kyle-portfolio's site",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "lint": "echo 'TODO: Add linting'",
+    "clean": "rm -rf dist .astro"
+  },
+  "dependencies": {
+    "astro": "^5.0.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "tailwindcss": "^4.0.0"
+  }
+}

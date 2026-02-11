@@ -1,0 +1,767 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    name: 'spellbook',
+    desc: 'Self-hosted MTG collection manager with mobile scanning & OCR',
+    lang: 'Python',
+    stars: 4,
+    url: 'https://github.com/KyleDerZwewordte/spellbook',
+  },
+  {
+    name: 'p2p-cli',
+    desc: 'Secure terminal P2P messenger with RSA/AES encryption',
+    lang: 'Rust',
+    stars: 0,
+    url: 'https://github.com/KyleDerZweite/p2p-cli',
+  },
+  {
+    name: 'hatchery',
+    desc: 'Self-hosted Modpack-to-Server platform for Pterodactyl',
+    lang: 'Python',
+    stars: 0,
+    url: 'https://github.com/KyleDerZweite/hatchery',
+  },
+  {
+    name: 'pterodeploy',
+    desc: 'AI-powered deployment assistant for Minecraft servers',
+    lang: 'Python',
+    stars: 1,
+    url: 'https://github.com/KyleDerZweite/pterodeploy',
+  },
+  {
+    name: 'rust-dno-crawler',
+    desc: 'German DNO data gathering and processing',
+    lang: 'Rust',
+    stars: 0,
+    url: 'https://github.com/KyleDerZweite/rust-dno-crawler',
+  },
+  {
+    name: 'word-salat',
+    desc: 'Text scrambler with AI decoding benchmarks',
+    lang: 'Python',
+    stars: 1,
+    url: 'https://github.com/KyleDerZweite/word-salat',
+  },
+];
+
+const techStack = ['Rust', 'Python', 'Go', 'JavaScript', 'TypeScript', 'Docker', 'Linux'];
+---
+
+<BaseLayout title="Leander Grau — Deep Space" accent="#06b6d4">
+  <canvas id="constellation" class="constellation-canvas"></canvas>
+
+  <nav class="nav animate-fade-down delay-1">
+    <a href="/" class="nav__back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Versions
+    </a>
+    <div class="nav__links">
+      <a href="#projects">Projects</a>
+      <a href="#tech">Tech</a>
+      <a href="#links">Links</a>
+    </div>
+  </nav>
+
+  <main class="space">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero__avatar-wrap animate-scale-in delay-2">
+        <div class="hero__orbit"></div>
+        <div class="hero__orbit hero__orbit--2"></div>
+        <img
+          src="https://avatars.githubusercontent.com/u/54944446?v=4"
+          alt="Leander Grau"
+          class="hero__avatar"
+          width="120"
+          height="120"
+        />
+      </div>
+
+      <div class="hero__text">
+        <p class="hero__label animate-fade-up delay-3">Deep Space</p>
+        <h1 class="hero__name animate-fade-up delay-4">Leander Grau</h1>
+        <p class="hero__nick animate-fade-up delay-5">kyle</p>
+        <p class="hero__bio animate-fade-up delay-6">
+          CS Student at HRW &mdash; Full-stack developer &mdash; Open source enthusiast
+        </p>
+        <p class="hero__location animate-fade-up delay-7">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          NRW, Germany
+        </p>
+      </div>
+    </section>
+
+    <!-- Separator -->
+    <div class="separator animate-fade-up delay-8"></div>
+
+    <!-- Projects -->
+    <section id="projects" class="section">
+      <h2 class="section__title animate-fade-up delay-8">Projects</h2>
+      <div class="projects">
+        {projects.map((p, i) => (
+          <a
+            href={p.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={`project animate-fade-up delay-${Math.min(i + 9, 16)}`}
+          >
+            <div class="project__header">
+              <span class="project__name">{p.name}</span>
+              <span class="project__lang">{p.lang}</span>
+            </div>
+            <p class="project__desc">{p.desc}</p>
+            {p.stars > 0 && (
+              <span class="project__stars">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                {p.stars}
+              </span>
+            )}
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Separator -->
+    <div class="separator animate-fade-up delay-12"></div>
+
+    <!-- Tech Stack -->
+    <section id="tech" class="section">
+      <h2 class="section__title animate-fade-up delay-10">Tech Stack</h2>
+      <div class="tech-grid animate-fade-up delay-11">
+        {techStack.map((t) => (
+          <span class="tech-tag">{t}</span>
+        ))}
+      </div>
+    </section>
+
+    <!-- Separator -->
+    <div class="separator animate-fade-up delay-13"></div>
+
+    <!-- Links -->
+    <section id="links" class="section">
+      <h2 class="section__title animate-fade-up delay-12">Links</h2>
+      <div class="links animate-fade-up delay-13">
+        <a href="https://github.com/KyleDerZweite" target="_blank" rel="noopener noreferrer" class="link-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+          <span class="link-item__url">KyleDerZweite</span>
+        </a>
+        <a href="https://kylehub.dev" target="_blank" rel="noopener noreferrer" class="link-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <span>Website</span>
+          <span class="link-item__url">kylehub.dev</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer animate-fade-up delay-16">
+      <p>&copy; {new Date().getFullYear()} Leander Grau</p>
+    </footer>
+  </main>
+</BaseLayout>
+
+<style>
+  /* ── Canvas ── */
+  .constellation-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ── Navigation ── */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    background: linear-gradient(to bottom, rgba(7, 8, 13, 0.9) 0%, transparent 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .nav__back {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    transition: color 0.3s var(--ease-out);
+  }
+
+  .nav__back:hover {
+    color: #06b6d4;
+  }
+
+  .nav__links {
+    display: flex;
+    gap: 28px;
+  }
+
+  .nav__links a {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--color-text-muted);
+    letter-spacing: 0.04em;
+    transition: color 0.3s var(--ease-out);
+  }
+
+  .nav__links a:hover {
+    color: #06b6d4;
+  }
+
+  /* ── Main Container ── */
+  .space {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100dvh;
+    padding: 140px 24px 80px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 32px;
+    padding-bottom: 64px;
+  }
+
+  .hero__avatar-wrap {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero__orbit {
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    animation: orbit-spin 12s linear infinite;
+  }
+
+  .hero__orbit::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #06b6d4;
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.6);
+  }
+
+  .hero__orbit--2 {
+    inset: -24px;
+    border-color: rgba(6, 182, 212, 0.08);
+    animation: orbit-spin 20s linear infinite reverse;
+  }
+
+  .hero__orbit--2::after {
+    width: 4px;
+    height: 4px;
+    background: rgba(6, 182, 212, 0.5);
+    box-shadow: 0 0 8px rgba(6, 182, 212, 0.3);
+  }
+
+  @keyframes orbit-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .hero__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(6, 182, 212, 0.2);
+  }
+
+  .hero__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero__label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #06b6d4;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  .hero__name {
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: #fafafa;
+  }
+
+  .hero__nick {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(6, 182, 212, 0.6);
+    letter-spacing: 0.06em;
+  }
+
+  .hero__bio {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    max-width: 420px;
+    margin-top: 8px;
+  }
+
+  .hero__location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--color-text-muted);
+    margin-top: 4px;
+  }
+
+  .hero__location svg {
+    opacity: 0.5;
+  }
+
+  /* ── Separator ── */
+  .separator {
+    width: 48px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.3), transparent);
+    margin: 16px 0 56px;
+  }
+
+  /* ── Sections ── */
+  .section {
+    width: 100%;
+    padding-bottom: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .section__title {
+    font-size: 0.7rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+    margin-bottom: 32px;
+  }
+
+  /* ── Projects ── */
+  .projects {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .project {
+    display: block;
+    position: relative;
+    padding: 20px 24px;
+    border-left: 2px solid rgba(6, 182, 212, 0.15);
+    background: transparent;
+    transition: all 0.4s var(--ease-out);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .project:hover {
+    border-left-color: #06b6d4;
+    background: rgba(6, 182, 212, 0.03);
+    padding-left: 28px;
+  }
+
+  .project__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .project__name {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #fafafa;
+    letter-spacing: 0.01em;
+  }
+
+  .project__lang {
+    font-size: 0.65rem;
+    font-weight: 400;
+    color: rgba(6, 182, 212, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 2px 8px;
+    border: 1px solid rgba(6, 182, 212, 0.15);
+    border-radius: 999px;
+  }
+
+  .project__desc {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    transition: color 0.4s var(--ease-out);
+  }
+
+  .project:hover .project__desc {
+    color: var(--color-text-secondary);
+  }
+
+  .project__stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    color: rgba(6, 182, 212, 0.5);
+    margin-top: 8px;
+  }
+
+  .project__stars svg {
+    opacity: 0.7;
+  }
+
+  /* ── Tech Stack ── */
+  .tech-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    max-width: 480px;
+  }
+
+  .tech-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    padding: 6px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    letter-spacing: 0.03em;
+    transition: all 0.3s var(--ease-out);
+  }
+
+  .tech-tag:hover {
+    border-color: rgba(6, 182, 212, 0.3);
+    color: #06b6d4;
+    background: rgba(6, 182, 212, 0.05);
+  }
+
+  /* ── Links ── */
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .link-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: all 0.3s var(--ease-out);
+  }
+
+  .link-item:hover {
+    border-color: rgba(6, 182, 212, 0.3);
+    background: rgba(6, 182, 212, 0.03);
+  }
+
+  .link-item svg {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: color 0.3s var(--ease-out);
+  }
+
+  .link-item:hover svg {
+    color: #06b6d4;
+  }
+
+  .link-item span:first-of-type {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--color-text);
+  }
+
+  .link-item__url {
+    margin-left: auto;
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border);
+    width: 100%;
+    text-align: center;
+  }
+
+  .footer p {
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.4;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .nav {
+      padding: 16px 20px;
+    }
+
+    .nav__links {
+      gap: 18px;
+    }
+
+    .space {
+      padding: 120px 20px 60px;
+    }
+
+    .hero {
+      padding-bottom: 48px;
+    }
+
+    .hero__avatar-wrap {
+      width: 120px;
+      height: 120px;
+    }
+
+    .hero__avatar {
+      width: 100px;
+      height: 100px;
+    }
+
+    .hero__orbit {
+      inset: -8px;
+    }
+
+    .hero__orbit--2 {
+      inset: -18px;
+    }
+
+    .project {
+      padding: 16px 18px;
+    }
+
+    .project:hover {
+      padding-left: 22px;
+    }
+
+    .separator {
+      margin: 12px 0 40px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .nav__links {
+      gap: 14px;
+    }
+
+    .nav__links a {
+      font-size: 0.72rem;
+    }
+
+    .hero__name {
+      font-size: 1.8rem;
+    }
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById('constellation') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d')!;
+
+  let width = 0;
+  let height = 0;
+  let mouseX = -1000;
+  let mouseY = -1000;
+  const PARTICLE_COUNT = 80;
+  const CONNECTION_DISTANCE = 150;
+  const MOUSE_RADIUS = 180;
+  const MOUSE_FORCE = 0.02;
+
+  interface Particle {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    radius: number;
+    opacity: number;
+  }
+
+  const particles: Particle[] = [];
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+
+  function createParticles() {
+    particles.length = 0;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        radius: Math.random() * 1.5 + 0.5,
+        opacity: Math.random() * 0.5 + 0.3,
+      });
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Update and draw particles
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+
+      // Mouse interaction: gentle attraction/repulsion
+      const dxMouse = mouseX - p.x;
+      const dyMouse = mouseY - p.y;
+      const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+
+      if (distMouse < MOUSE_RADIUS && distMouse > 0) {
+        const force = (MOUSE_RADIUS - distMouse) / MOUSE_RADIUS * MOUSE_FORCE;
+        // Gentle repulsion when very close, attraction at medium range
+        if (distMouse < MOUSE_RADIUS * 0.3) {
+          p.vx -= (dxMouse / distMouse) * force * 2;
+          p.vy -= (dyMouse / distMouse) * force * 2;
+        } else {
+          p.vx += (dxMouse / distMouse) * force * 0.5;
+          p.vy += (dyMouse / distMouse) * force * 0.5;
+        }
+      }
+
+      // Apply velocity with damping
+      p.vx *= 0.99;
+      p.vy *= 0.99;
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Wrap around edges
+      if (p.x < -20) p.x = width + 20;
+      if (p.x > width + 20) p.x = -20;
+      if (p.y < -20) p.y = height + 20;
+      if (p.y > height + 20) p.y = -20;
+
+      // Draw particle
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(6, 182, 212, ${p.opacity})`;
+      ctx.fill();
+
+      // Draw connections
+      for (let j = i + 1; j < particles.length; j++) {
+        const p2 = particles[j];
+        const dx = p.x - p2.x;
+        const dy = p.y - p2.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < CONNECTION_DISTANCE) {
+          const alpha = (1 - dist / CONNECTION_DISTANCE) * 0.15;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = `rgba(6, 182, 212, ${alpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  // Initialize
+  resize();
+  createParticles();
+  animate();
+
+  // Events
+  window.addEventListener('resize', () => {
+    resize();
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  window.addEventListener('mouseleave', () => {
+    mouseX = -1000;
+    mouseY = -1000;
+  });
+
+  // Touch support
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 0) {
+      mouseX = e.touches[0].clientX;
+      mouseY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => {
+    mouseX = -1000;
+    mouseY = -1000;
+  });
+</script>

@@ -1,0 +1,1035 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    name: 'spellbook',
+    desc: 'Self-hosted MTG collection manager with mobile scanning & OCR',
+    lang: 'Python',
+    stars: 4,
+    url: 'https://github.com/KyleDerZweite/spellbook',
+    featured: true,
+  },
+  {
+    name: 'p2p-cli',
+    desc: 'Secure terminal P2P messenger with RSA/AES encryption',
+    lang: 'Rust',
+    stars: 0,
+    url: 'https://github.com/KyleDerZweite/p2p-cli',
+  },
+  {
+    name: 'hatchery',
+    desc: 'Self-hosted Modpack-to-Server platform for Pterodactyl',
+    lang: 'Python',
+    stars: 0,
+    url: 'https://github.com/KyleDerZweite/hatchery',
+  },
+  {
+    name: 'pterodeploy',
+    desc: 'AI-powered deployment assistant for Minecraft servers',
+    lang: 'Python',
+    stars: 1,
+    url: 'https://github.com/KyleDerZweite/pterodeploy',
+  },
+  {
+    name: 'rust-dno-crawler',
+    desc: 'German DNO data gathering and processing',
+    lang: 'Rust',
+    stars: 0,
+    url: 'https://github.com/KyleDerZweite/rust-dno-crawler',
+  },
+  {
+    name: 'word-salat',
+    desc: 'Text scrambler with AI decoding benchmarks',
+    lang: 'Python',
+    stars: 1,
+    url: 'https://github.com/KyleDerZweite/word-salat',
+  },
+];
+
+const techStack = [
+  { name: 'Rust', color: '#dea584', pct: 90 },
+  { name: 'Python', color: '#3572A5', pct: 85 },
+  { name: 'Go', color: '#00ADD8', pct: 60 },
+  { name: 'JS/TS', color: '#f1e05a', pct: 75 },
+  { name: 'Docker', color: '#384d54', pct: 70 },
+  { name: 'Linux', color: '#e95420', pct: 80 },
+];
+---
+
+<BaseLayout title="Leander Grau — Bento" accent="#f59e0b">
+  <!-- Navigation -->
+  <nav class="nav animate-fade-down delay-1">
+    <a href="/" class="nav__brand">
+      <span class="nav__logo">LG</span>
+      <span class="nav__name">Leander Grau</span>
+    </a>
+    <div class="nav__links">
+      <a href="https://github.com/KyleDerZweite" target="_blank" rel="noopener" class="nav__link">GitHub</a>
+      <a href="https://kylehub.dev" class="nav__link">Blog</a>
+      <a href="/" class="nav__link nav__link--back">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Versions
+      </a>
+    </div>
+  </nav>
+
+  <!-- Bento Grid -->
+  <main class="bento-container">
+    <div class="bento">
+
+      <!-- ═══ Card 1: Hero / Intro (2 cols) ═══ -->
+      <div class="card card--hero animate-scale-in delay-2">
+        <div class="hero">
+          <div class="hero__avatar-wrap">
+            <img
+              src="https://avatars.githubusercontent.com/u/54944446?v=4"
+              alt="Leander Grau"
+              class="hero__avatar"
+              width="96"
+              height="96"
+              loading="eager"
+            />
+            <span class="hero__status"></span>
+          </div>
+          <div class="hero__text">
+            <p class="hero__greeting">Hi, I'm</p>
+            <h1 class="hero__name">Leander Grau</h1>
+            <p class="hero__tagline">CS Student at HRW &mdash; building tools I&nbsp;wish&nbsp;existed.</p>
+            <div class="hero__badges">
+              <span class="badge badge--amber">Full-stack Developer</span>
+              <span class="badge badge--ghost">Open Source</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Card 2: About (1 col) ═══ -->
+      <div class="card card--about animate-fade-up delay-3">
+        <p class="card__label">About</p>
+        <p class="card__body">
+          I'm a CS student who loves turning complex problems into clean, self-hosted solutions.
+          My work spans system-level Rust, Python backends, and Go services &mdash; always with
+          a focus on developer experience and practical utility.
+        </p>
+        <p class="card__body card__body--muted">
+          When I'm not coding, I'm probably tinkering with homelab infrastructure or
+          brewing coffee.
+        </p>
+      </div>
+
+      <!-- ═══ Card 3: Location (small) ═══ -->
+      <div class="card card--location animate-fade-up delay-4">
+        <div class="location">
+          <svg class="location__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <div>
+            <p class="location__city">NRW, Germany</p>
+            <p class="location__detail">CET / UTC+1</p>
+          </div>
+        </div>
+        <div class="location__map">
+          <div class="location__dot"></div>
+        </div>
+      </div>
+
+      <!-- ═══ Card 4: Featured Project — spellbook (2 cols) ═══ -->
+      <a href="https://github.com/KyleDerZweite/spellbook" target="_blank" rel="noopener" class="card card--featured animate-fade-up delay-5">
+        <div class="featured">
+          <div class="featured__header">
+            <div class="featured__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+              </svg>
+            </div>
+            <span class="featured__label">Featured Project</span>
+            <div class="featured__stars">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              <span>4</span>
+            </div>
+          </div>
+          <h2 class="featured__name">spellbook</h2>
+          <p class="featured__desc">Self-hosted MTG collection manager with mobile scanning & OCR. Catalog your cards, track prices, and build decks &mdash; all from your phone's camera.</p>
+          <div class="featured__meta">
+            <span class="lang-dot" style="--dot-color: #3572A5"></span>
+            <span>Python</span>
+            <span class="featured__sep">&middot;</span>
+            <span>Self-hosted</span>
+            <span class="featured__sep">&middot;</span>
+            <span>Mobile-first</span>
+          </div>
+        </div>
+        <div class="featured__glow"></div>
+      </a>
+
+      <!-- ═══ Card 5: Project — p2p-cli ═══ -->
+      <a href="https://github.com/KyleDerZweite/p2p-cli" target="_blank" rel="noopener" class="card card--project animate-fade-up delay-6">
+        <div class="project__header">
+          <svg class="project__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span class="lang-dot" style="--dot-color: #dea584"></span>
+          <span class="project__lang">Rust</span>
+        </div>
+        <h3 class="project__name">p2p-cli</h3>
+        <p class="project__desc">Secure terminal P2P messenger with RSA/AES encryption</p>
+      </a>
+
+      <!-- ═══ Card 6: Project — hatchery ═══ -->
+      <a href="https://github.com/KyleDerZweite/hatchery" target="_blank" rel="noopener" class="card card--project animate-fade-up delay-7">
+        <div class="project__header">
+          <svg class="project__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          <span class="lang-dot" style="--dot-color: #3572A5"></span>
+          <span class="project__lang">Python</span>
+        </div>
+        <h3 class="project__name">hatchery</h3>
+        <p class="project__desc">Self-hosted Modpack-to-Server platform for Pterodactyl</p>
+      </a>
+
+      <!-- ═══ Card 7: Tech Stack (1 col) ═══ -->
+      <div class="card card--tech animate-fade-up delay-8">
+        <p class="card__label">Tech Stack</p>
+        <div class="tech-bars">
+          {techStack.map((t) => (
+            <div class="tech-bar">
+              <div class="tech-bar__label">
+                <span class="lang-dot" style={`--dot-color: ${t.color}`}></span>
+                <span>{t.name}</span>
+              </div>
+              <div class="tech-bar__track">
+                <div class="tech-bar__fill" style={`width: ${t.pct}%; background: ${t.color}`}></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- ═══ Card 8: GitHub Stats (1 col) ═══ -->
+      <a href="https://github.com/KyleDerZweite" target="_blank" rel="noopener" class="card card--github animate-fade-up delay-9">
+        <div class="github">
+          <svg class="github__icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          <div class="github__text">
+            <p class="github__handle">@KyleDerZweite</p>
+            <p class="github__sub">Open source projects & contributions</p>
+          </div>
+        </div>
+        <div class="github__arrow">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M5 15L15 5M15 5H8M15 5v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
+
+      <!-- ═══ Card 9: More Projects (small) ═══ -->
+      <div class="card card--more-projects animate-fade-up delay-10">
+        <p class="card__label">More Projects</p>
+        <div class="mini-projects">
+          <a href="https://github.com/KyleDerZweite/pterodeploy" target="_blank" rel="noopener" class="mini-project">
+            <span class="mini-project__name">pterodeploy</span>
+            <span class="mini-project__meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="mini-project__star">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              1
+            </span>
+          </a>
+          <a href="https://github.com/KyleDerZweite/rust-dno-crawler" target="_blank" rel="noopener" class="mini-project">
+            <span class="mini-project__name">rust-dno-crawler</span>
+            <span class="mini-project__lang">
+              <span class="lang-dot lang-dot--sm" style="--dot-color: #dea584"></span>
+              Rust
+            </span>
+          </a>
+          <a href="https://github.com/KyleDerZweite/word-salat" target="_blank" rel="noopener" class="mini-project">
+            <span class="mini-project__name">word-salat</span>
+            <span class="mini-project__meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="mini-project__star">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              1
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ═══ Card 10: Contact (small) ═══ -->
+      <div class="card card--contact animate-fade-up delay-11">
+        <p class="card__label">Get in touch</p>
+        <a href="https://kylehub.dev" class="contact__link" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+          </svg>
+          <span>kylehub.dev</span>
+        </a>
+        <a href="https://github.com/KyleDerZweite" class="contact__link" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          <span>KyleDerZweite</span>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer animate-fade-up delay-12">
+    <p>&copy; {new Date().getFullYear()} Leander Grau. Built with Astro.</p>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* ── Navigation ── */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    background: rgba(9, 9, 11, 0.8);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    background: #f59e0b;
+    color: #09090b;
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+  }
+
+  .nav__name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-text);
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .nav__link {
+    font-size: 0.825rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    transition: color 0.2s var(--ease-out);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .nav__link:hover {
+    color: var(--color-text);
+  }
+
+  .nav__link--back {
+    color: var(--color-text-muted);
+  }
+
+  .nav__link--back:hover {
+    color: #f59e0b;
+  }
+
+  /* ── Bento Container ── */
+  .bento-container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 100px 24px 40px;
+  }
+
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  /* ── Base Card ── */
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-color: var(--color-border-hover);
+  }
+
+  .card__label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 14px;
+  }
+
+  .card__body {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+  }
+
+  .card__body + .card__body {
+    margin-top: 12px;
+  }
+
+  .card__body--muted {
+    color: var(--color-text-muted);
+    font-size: 0.825rem;
+  }
+
+  /* ── Card Grid Placement ── */
+  .card--hero { grid-column: span 2; }
+  .card--about { grid-column: span 1; }
+  .card--location { grid-column: span 1; }
+  .card--featured { grid-column: span 2; }
+  .card--project { grid-column: span 1; }
+  .card--tech { grid-column: span 1; }
+  .card--github { grid-column: span 1; }
+  .card--more-projects { grid-column: span 1; }
+  .card--contact { grid-column: span 1; }
+
+  /* ── Hero Card ── */
+  .card--hero {
+    background: linear-gradient(135deg, #18181b 0%, #1c1917 100%);
+    padding: 32px;
+  }
+
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .hero__avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .hero__avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 3px solid #f59e0b;
+    object-fit: cover;
+  }
+
+  .hero__status {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 16px;
+    height: 16px;
+    background: #22c55e;
+    border: 3px solid #18181b;
+    border-radius: 50%;
+  }
+
+  .hero__text {
+    min-width: 0;
+  }
+
+  .hero__greeting {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #f59e0b;
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .hero__name {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #fafafa 30%, #a1a1aa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero__tagline {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .hero__badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .badge--amber {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.25);
+  }
+
+  .badge--ghost {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+  }
+
+  /* ── Location Card ── */
+  .card--location {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 160px;
+  }
+
+  .location {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .location__icon {
+    color: #f59e0b;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .location__city {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+
+  .location__detail {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 2px;
+  }
+
+  .location__map {
+    position: relative;
+    height: 60px;
+    border-radius: var(--radius-sm);
+    background:
+      radial-gradient(circle at 65% 45%, rgba(245, 158, 11, 0.06) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(39, 39, 42, 0.3) 0%, rgba(24, 24, 27, 0.5) 100%);
+    overflow: hidden;
+  }
+
+  .location__map::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 11px, rgba(245, 158, 11, 0.04) 11px, rgba(245, 158, 11, 0.04) 12px),
+      repeating-linear-gradient(90deg, transparent, transparent 11px, rgba(245, 158, 11, 0.04) 11px, rgba(245, 158, 11, 0.04) 12px);
+  }
+
+  .location__dot {
+    position: absolute;
+    top: 45%;
+    left: 65%;
+    width: 8px;
+    height: 8px;
+    background: #f59e0b;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2), 0 0 0 8px rgba(245, 158, 11, 0.08);
+  }
+
+  /* ── Featured Project Card ── */
+  .card--featured {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: linear-gradient(135deg, #18181b 0%, #1a1510 100%);
+    padding: 28px 32px;
+  }
+
+  .card--featured:hover {
+    border-color: rgba(245, 158, 11, 0.4);
+  }
+
+  .featured__glow {
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .featured__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .featured__icon {
+    color: #f59e0b;
+  }
+
+  .featured__label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.1);
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  .featured__stars {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #f59e0b;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .featured__name {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    color: var(--color-text);
+  }
+
+  .featured__desc {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    max-width: 500px;
+  }
+
+  .featured__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .featured__sep {
+    color: var(--color-border);
+  }
+
+  /* ── Project Cards ── */
+  .card--project {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card--project:hover {
+    border-color: rgba(245, 158, 11, 0.3);
+  }
+
+  .project__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .project__icon {
+    color: var(--color-text-muted);
+  }
+
+  .project__lang {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-left: auto;
+  }
+
+  .project__name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--color-text);
+  }
+
+  .project__desc {
+    font-size: 0.825rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  /* ── Language Dot ── */
+  .lang-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--dot-color);
+    flex-shrink: 0;
+  }
+
+  .lang-dot--sm {
+    width: 8px;
+    height: 8px;
+  }
+
+  /* ── Tech Stack Card ── */
+  .card--tech {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tech-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .tech-bar__label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+  }
+
+  .tech-bar__track {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .tech-bar__fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 1s var(--ease-out);
+  }
+
+  /* ── GitHub Card ── */
+  .card--github {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card--github:hover {
+    border-color: rgba(245, 158, 11, 0.3);
+  }
+
+  .card--github:hover .github__arrow {
+    color: #f59e0b;
+    transform: translate(2px, -2px);
+  }
+
+  .github {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .github__icon {
+    color: var(--color-text);
+    flex-shrink: 0;
+  }
+
+  .github__handle {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+
+  .github__sub {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 2px;
+  }
+
+  .github__arrow {
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: all 0.3s var(--ease-out);
+  }
+
+  /* ── More Projects Card ── */
+  .mini-projects {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .mini-project {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-border);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s var(--ease-out);
+  }
+
+  .mini-project:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .mini-project:first-child {
+    padding-top: 0;
+  }
+
+  .mini-project:hover .mini-project__name {
+    color: #f59e0b;
+  }
+
+  .mini-project__name {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--color-text);
+    transition: color 0.2s var(--ease-out);
+  }
+
+  .mini-project__meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .mini-project__star {
+    color: #f59e0b;
+  }
+
+  .mini-project__lang {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  /* ── Contact Card ── */
+  .card--contact {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact__link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.2s var(--ease-out);
+  }
+
+  .contact__link:hover {
+    color: #f59e0b;
+  }
+
+  .contact__link svg {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: color 0.2s var(--ease-out);
+  }
+
+  .contact__link:hover svg {
+    color: #f59e0b;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 40px 24px 32px;
+  }
+
+  .footer p {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  /* ── Selection ── */
+  ::selection {
+    background-color: rgba(245, 158, 11, 0.3);
+    color: #fff;
+  }
+
+  /* ── Responsive: Tablet (2 columns) ── */
+  @media (max-width: 768px) {
+    .bento-container {
+      padding: 88px 16px 32px;
+    }
+
+    .bento {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .card--hero { grid-column: span 2; }
+    .card--about { grid-column: span 1; }
+    .card--location { grid-column: span 1; }
+    .card--featured { grid-column: span 2; }
+    .card--project { grid-column: span 1; }
+    .card--tech { grid-column: span 1; }
+    .card--github { grid-column: span 2; }
+    .card--more-projects { grid-column: span 1; }
+    .card--contact { grid-column: span 1; }
+
+    .hero__avatar {
+      width: 72px;
+      height: 72px;
+    }
+
+    .hero__name {
+      font-size: 1.5rem;
+    }
+
+    .featured__name {
+      font-size: 1.25rem;
+    }
+
+    .nav {
+      padding: 14px 20px;
+    }
+
+    .nav__name {
+      display: none;
+    }
+  }
+
+  /* ── Responsive: Mobile (1 column) ── */
+  @media (max-width: 520px) {
+    .bento-container {
+      padding: 80px 14px 24px;
+    }
+
+    .bento {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .card--hero,
+    .card--about,
+    .card--location,
+    .card--featured,
+    .card--project,
+    .card--tech,
+    .card--github,
+    .card--more-projects,
+    .card--contact {
+      grid-column: span 1;
+    }
+
+    .card {
+      padding: 20px;
+    }
+
+    .card--hero {
+      padding: 24px;
+    }
+
+    .hero {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .hero__avatar {
+      width: 64px;
+      height: 64px;
+    }
+
+    .hero__name {
+      font-size: 1.4rem;
+    }
+
+    .card--featured {
+      padding: 22px;
+    }
+
+    .featured__name {
+      font-size: 1.2rem;
+    }
+
+    .github {
+      gap: 12px;
+    }
+
+    .github__icon {
+      width: 28px;
+      height: 28px;
+    }
+
+    .nav__links {
+      gap: 16px;
+    }
+  }
+</style>

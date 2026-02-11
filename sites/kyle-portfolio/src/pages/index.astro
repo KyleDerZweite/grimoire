@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const versions = [
+  { id: 1, name: 'Noir Geometry', desc: 'Geometric shapes, electric blue accents, precision grid layout', accent: '#3b82f6', out: false },
+  { id: 2, name: 'Aurora', desc: 'Flowing gradient mesh, glassmorphism cards, fluid motion', accent: '#8b5cf6', out: true },
+  { id: 3, name: 'Raw Signal', desc: 'Brutalist aesthetic, oversized type, high contrast, raw energy', accent: '#ef4444', out: false },
+  { id: 4, name: 'Deep Space', desc: 'Particle constellation network, minimal floating layout', accent: '#06b6d4', out: false },
+  { id: 5, name: 'Bento', desc: 'Modern bento grid, variable cards, warm amber accents', accent: '#f59e0b', out: true },
+];
+---
+
+<BaseLayout title="Leander Grau — Portfolio Versions">
+  <main class="hub">
+    <div class="hub__header animate-fade-up">
+      <p class="hub__label">Portfolio Showcase</p>
+      <h1 class="hub__title">Leander Grau</h1>
+      <p class="hub__subtitle">5 design directions. Pick your favorite.</p>
+    </div>
+
+    <div class="hub__grid">
+      {versions.map((v, i) => (
+        <a href={`/v${v.id}/`} class={`hub__card ${v.out ? 'hub__card--out' : ''} animate-fade-up delay-${i + 3}`} style={`--card-accent: ${v.accent}`}>
+          <div class="hub__card-number">
+            <span>V{v.id}</span>
+          </div>
+          <div class="hub__card-content">
+            <h2 class="hub__card-name">
+              {v.name}
+              {v.out && <span class="hub__card-badge">OUT</span>}
+            </h2>
+            <p class="hub__card-desc">{v.desc}</p>
+          </div>
+          <div class="hub__card-arrow">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <footer class="hub__footer animate-fade-up delay-10">
+      <p>&copy; {new Date().getFullYear()} Leander Grau</p>
+    </footer>
+  </main>
+</BaseLayout>
+
+<style>
+  .hub {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+    gap: 48px;
+  }
+
+  .hub__header {
+    text-align: center;
+    max-width: 480px;
+  }
+
+  .hub__label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+
+  .hub__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hub__subtitle {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  .hub__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .hub__card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    transition: all 0.3s var(--ease-out);
+    cursor: pointer;
+  }
+
+  .hub__card:hover {
+    border-color: var(--card-accent);
+    background: var(--color-surface-hover);
+    transform: translateX(4px);
+  }
+
+  .hub__card--out {
+    opacity: 0.4;
+  }
+
+  .hub__card--out:hover {
+    opacity: 0.6;
+  }
+
+  .hub__card-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-left: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    vertical-align: middle;
+  }
+
+  .hub__card-number {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--card-accent) 12%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hub__card-number span {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--card-accent);
+  }
+
+  .hub__card-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .hub__card-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .hub__card-desc {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
+  .hub__card-arrow {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: all 0.3s var(--ease-out);
+  }
+
+  .hub__card:hover .hub__card-arrow {
+    color: var(--card-accent);
+    transform: translateX(4px);
+  }
+
+  .hub__footer p {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 480px) {
+    .hub { padding: 40px 16px; gap: 36px; }
+    .hub__card { padding: 16px 18px; }
+    .hub__card-desc { display: none; }
+  }
+</style>

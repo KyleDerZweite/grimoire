@@ -1,0 +1,1136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    name: 'spellbook',
+    desc: 'Self-hosted MTG collection manager with mobile scanning & OCR',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 4,
+    url: 'https://github.com/KyleDerZwewordte/spellbook',
+  },
+  {
+    name: 'p2p-cli',
+    desc: 'Secure terminal P2P messenger with RSA/AES encryption',
+    lang: 'Rust',
+    langColor: '#dea584',
+    stars: 0,
+    url: 'https://github.com/KyleDerZweite/p2p-cli',
+  },
+  {
+    name: 'hatchery',
+    desc: 'Self-hosted Modpack-to-Server platform for Pterodactyl',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 0,
+    url: 'https://github.com/KyleDerZweite/hatchery',
+  },
+  {
+    name: 'pterodeploy',
+    desc: 'AI-powered deployment assistant for Minecraft servers',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 1,
+    url: 'https://github.com/KyleDerZweite/pterodeploy',
+  },
+  {
+    name: 'rust-dno-crawler',
+    desc: 'German DNO data gathering and processing',
+    lang: 'Rust',
+    langColor: '#dea584',
+    stars: 0,
+    url: 'https://github.com/KyleDerZweite/rust-dno-crawler',
+  },
+  {
+    name: 'word-salat',
+    desc: 'Text scrambler with AI decoding benchmarks',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 1,
+    url: 'https://github.com/KyleDerZweite/word-salat',
+  },
+];
+
+const skills = [
+  { name: 'Rust', color: '#dea584' },
+  { name: 'Python', color: '#3572A5' },
+  { name: 'Go', color: '#00ADD8' },
+  { name: 'JavaScript', color: '#f7df1e' },
+  { name: 'TypeScript', color: '#3178c6' },
+  { name: 'Docker', color: '#2496ED' },
+  { name: 'Linux', color: '#FCC624' },
+];
+
+const navLinks = [
+  { label: 'About', href: '#about' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Contact', href: '#contact' },
+];
+---
+
+<BaseLayout title="Leander Grau — Aurora" accent="#8b5cf6">
+  <!-- Animated gradient mesh background -->
+  <div class="aurora-bg" aria-hidden="true">
+    <div class="aurora-blob aurora-blob--purple"></div>
+    <div class="aurora-blob aurora-blob--cyan"></div>
+    <div class="aurora-blob aurora-blob--emerald"></div>
+    <div class="aurora-blob aurora-blob--purple-2"></div>
+    <div class="aurora-blob aurora-blob--cyan-2"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav animate-fade-down">
+    <div class="nav__inner">
+      <a href="/v2/" class="nav__logo">
+        <span class="nav__logo-symbol">~</span>
+        <span class="nav__logo-text">kyle</span>
+      </a>
+      <div class="nav__links">
+        {navLinks.map((link) => (
+          <a href={link.href} class="nav__link">{link.label}</a>
+        ))}
+      </div>
+      <a href="https://github.com/KyleDerZweite" target="_blank" rel="noopener noreferrer" class="nav__github" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <main class="aurora-main">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero__content">
+        <div class="hero__avatar-wrap animate-scale-in delay-1">
+          <img
+            src="https://avatars.githubusercontent.com/u/54944446?v=4"
+            alt="Leander Grau"
+            class="hero__avatar"
+            width="120"
+            height="120"
+          />
+          <div class="hero__avatar-ring"></div>
+        </div>
+        <div class="hero__badge animate-fade-up delay-2">
+          <span class="hero__badge-dot"></span>
+          Available for collaboration
+        </div>
+        <h1 class="hero__name animate-fade-up delay-3">
+          <span class="hero__name-gradient">Leander Grau</span>
+        </h1>
+        <p class="hero__handle animate-fade-up delay-4">@kyle</p>
+        <p class="hero__bio animate-fade-up delay-5">
+          CS Student at HRW &middot; Full-stack developer &middot; Open source enthusiast
+        </p>
+        <div class="hero__location animate-fade-up delay-6">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          NRW, Germany
+        </div>
+        <div class="hero__actions animate-fade-up delay-7">
+          <a href="#projects" class="hero__btn hero__btn--primary">
+            View Projects
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
+            </svg>
+          </a>
+          <a href="https://github.com/KyleDerZweite" target="_blank" rel="noopener noreferrer" class="hero__btn hero__btn--glass">
+            GitHub
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="hero__scroll animate-fade-up delay-10">
+        <div class="hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="section__container">
+        <div class="section__header animate-fade-up">
+          <span class="section__label">01</span>
+          <h2 class="section__title">About</h2>
+        </div>
+        <div class="about__grid">
+          <div class="glass-card about__card animate-fade-up delay-2">
+            <div class="about__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+            </div>
+            <h3 class="about__card-title">Student</h3>
+            <p class="about__card-text">Studying Computer Science at Hochschule Ruhr West, diving deep into systems programming and distributed architectures.</p>
+          </div>
+          <div class="glass-card about__card animate-fade-up delay-4">
+            <div class="about__icon about__icon--cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <h3 class="about__card-title">Developer</h3>
+            <p class="about__card-text">Full-stack builder who loves Rust for its precision, Python for its speed of iteration, and Go for its elegant concurrency.</p>
+          </div>
+          <div class="glass-card about__card animate-fade-up delay-6">
+            <div class="about__icon about__icon--emerald">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <h3 class="about__card-title">Open Source</h3>
+            <p class="about__card-text">Building tools in the open for self-hosters, gamers, and fellow tinkerers. Every project ships with MIT or Apache license.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+      <div class="section__container">
+        <div class="section__header animate-fade-up">
+          <span class="section__label">02</span>
+          <h2 class="section__title">Projects</h2>
+        </div>
+        <div class="projects__grid">
+          {projects.map((project, i) => (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`glass-card project-card animate-fade-up delay-${(i + 1) * 2}`}
+            >
+              <div class="project-card__header">
+                <div class="project-card__name-row">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="project-card__repo-icon">
+                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"/>
+                    <path d="M9 18c-4.51 2-5-2-7-2"/>
+                  </svg>
+                  <span class="project-card__name">{project.name}</span>
+                </div>
+                {project.stars > 0 && (
+                  <div class="project-card__stars">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <span>{project.stars}</span>
+                  </div>
+                )}
+              </div>
+              <p class="project-card__desc">{project.desc}</p>
+              <div class="project-card__footer">
+                <span class="project-card__lang">
+                  <span class="project-card__lang-dot" style={`background: ${project.langColor}`}></span>
+                  {project.lang}
+                </span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="project-card__arrow">
+                  <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+                </svg>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+      <div class="section__container">
+        <div class="section__header animate-fade-up">
+          <span class="section__label">03</span>
+          <h2 class="section__title">Tech Stack</h2>
+        </div>
+        <div class="skills__wrap animate-fade-up delay-3">
+          {skills.map((skill, i) => (
+            <span class={`skill-pill animate-scale-in delay-${i + 4}`} style={`--pill-accent: ${skill.color}`}>
+              <span class="skill-pill__dot" style={`background: ${skill.color}`}></span>
+              {skill.name}
+            </span>
+          ))}
+        </div>
+        <div class="skills__extras animate-fade-up delay-12">
+          <p class="skills__note">Also familiar with</p>
+          <div class="skills__secondary">
+            {['Astro', 'Tailwind CSS', 'PostgreSQL', 'Redis', 'Git', 'Podman', 'Nginx', 'Pterodactyl'].map((s) => (
+              <span class="skill-tag">{s}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section section--last">
+      <div class="section__container">
+        <div class="section__header animate-fade-up">
+          <span class="section__label">04</span>
+          <h2 class="section__title">Get in Touch</h2>
+        </div>
+        <div class="contact__grid">
+          <a href="https://github.com/KyleDerZweite" target="_blank" rel="noopener noreferrer" class="glass-card contact-card animate-fade-up delay-2">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="contact-card__icon">
+              <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+            </svg>
+            <div class="contact-card__text">
+              <span class="contact-card__label">GitHub</span>
+              <span class="contact-card__value">KyleDerZweite</span>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="contact-card__arrow">
+              <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </a>
+          <a href="https://kylehub.dev" target="_blank" rel="noopener noreferrer" class="glass-card contact-card animate-fade-up delay-4">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="contact-card__icon contact-card__icon--stroke">
+              <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <div class="contact-card__text">
+              <span class="contact-card__label">Website</span>
+              <span class="contact-card__value">kylehub.dev</span>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="contact-card__arrow">
+              <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="aurora-footer animate-fade-up">
+      <p>&copy; {new Date().getFullYear()} Leander Grau. Built with Astro.</p>
+    </footer>
+  </main>
+</BaseLayout>
+
+<style>
+  /* ── Aurora Background ── */
+  .aurora-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    background: #0a0a12;
+    pointer-events: none;
+  }
+
+  .aurora-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.4;
+    will-change: transform;
+  }
+
+  .aurora-blob--purple {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+    top: -10%;
+    left: -5%;
+    animation: drift1 20s ease-in-out infinite alternate;
+  }
+
+  .aurora-blob--cyan {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+    top: 30%;
+    right: -10%;
+    animation: drift2 25s ease-in-out infinite alternate;
+  }
+
+  .aurora-blob--emerald {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, #10b981 0%, transparent 70%);
+    bottom: -5%;
+    left: 20%;
+    animation: drift3 22s ease-in-out infinite alternate;
+  }
+
+  .aurora-blob--purple-2 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, #7c3aed 0%, transparent 70%);
+    bottom: 20%;
+    right: 15%;
+    animation: drift4 18s ease-in-out infinite alternate;
+  }
+
+  .aurora-blob--cyan-2 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #0891b2 0%, transparent 70%);
+    top: 60%;
+    left: -8%;
+    animation: drift5 24s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift1 {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(80px, 50px) scale(1.1); }
+    66% { transform: translate(-30px, 100px) scale(0.95); }
+    100% { transform: translate(60px, -40px) scale(1.05); }
+  }
+
+  @keyframes drift2 {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-70px, 60px) scale(1.05); }
+    66% { transform: translate(40px, -50px) scale(1.1); }
+    100% { transform: translate(-50px, 80px) scale(0.95); }
+  }
+
+  @keyframes drift3 {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(60px, -70px) scale(1.08); }
+    66% { transform: translate(-40px, -30px) scale(0.92); }
+    100% { transform: translate(30px, 50px) scale(1.05); }
+  }
+
+  @keyframes drift4 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-60px, -40px) scale(1.15); }
+    100% { transform: translate(40px, 60px) scale(0.9); }
+  }
+
+  @keyframes drift5 {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(50px, -60px) scale(1.1); }
+    100% { transform: translate(-30px, 40px) scale(0.95); }
+  }
+
+  /* ── Glass Utility ── */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-xl);
+    transition: all 0.4s var(--ease-out);
+  }
+
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  /* ── Navigation ── */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0 24px;
+    background: rgba(10, 10, 18, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .nav__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav__logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-text);
+    transition: color 0.3s var(--ease-out);
+  }
+
+  .nav__logo-symbol {
+    color: #8b5cf6;
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+
+  .nav__logo:hover {
+    color: #8b5cf6;
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav__link {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    transition: color 0.3s var(--ease-out);
+    position: relative;
+  }
+
+  .nav__link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+    border-radius: 1px;
+    transition: width 0.3s var(--ease-out);
+  }
+
+  .nav__link:hover {
+    color: var(--color-text);
+  }
+
+  .nav__link:hover::after {
+    width: 100%;
+  }
+
+  .nav__github {
+    color: var(--color-text-secondary);
+    transition: color 0.3s var(--ease-out);
+    display: flex;
+    align-items: center;
+  }
+
+  .nav__github:hover {
+    color: #8b5cf6;
+  }
+
+  /* ── Main ── */
+  .aurora-main {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 24px 60px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 640px;
+  }
+
+  .hero__avatar-wrap {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 8px;
+  }
+
+  .hero__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero__avatar-ring {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #8b5cf6, #06b6d4, #10b981, #8b5cf6);
+    z-index: 1;
+    animation: ringRotate 8s linear infinite;
+  }
+
+  @keyframes ringRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 100px;
+    padding: 6px 16px;
+  }
+
+  .hero__badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  .hero__name {
+    font-size: clamp(2.8rem, 8vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  .hero__name-gradient {
+    background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 30%, #8b5cf6 50%, #06b6d4 70%, #10b981 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+
+  .hero__handle {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #8b5cf6;
+    opacity: 0.8;
+  }
+
+  .hero__bio {
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    max-width: 500px;
+  }
+
+  .hero__location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .hero__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .hero__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.35s var(--ease-out);
+    cursor: pointer;
+  }
+
+  .hero__btn--primary {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: #fff;
+    box-shadow: 0 4px 24px rgba(139, 92, 246, 0.3);
+  }
+
+  .hero__btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.45);
+  }
+
+  .hero__btn--glass {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-text-secondary);
+  }
+
+  .hero__btn--glass:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: var(--color-text);
+    transform: translateY(-2px);
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .hero__scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, rgba(139, 92, 246, 0.6), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; height: 48px; }
+    50% { opacity: 0.8; height: 64px; }
+  }
+
+  /* ── Sections ── */
+  .section {
+    padding: 100px 24px;
+    position: relative;
+  }
+
+  .section--last {
+    padding-bottom: 60px;
+  }
+
+  .section__container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section__header {
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section__label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #8b5cf6;
+    opacity: 0.7;
+  }
+
+  .section__title {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── About ── */
+  .about__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .about__card {
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .about__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-lg);
+    background: rgba(139, 92, 246, 0.12);
+    color: #8b5cf6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about__icon--cyan {
+    background: rgba(6, 182, 212, 0.12);
+    color: #06b6d4;
+  }
+
+  .about__icon--emerald {
+    background: rgba(16, 185, 129, 0.12);
+    color: #10b981;
+  }
+
+  .about__card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .about__card-text {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+  }
+
+  /* ── Projects ── */
+  .projects__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .project-card {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-xl);
+    padding: 1px;
+    background: linear-gradient(135deg, transparent 30%, rgba(139, 92, 246, 0.3) 50%, transparent 70%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out);
+    pointer-events: none;
+  }
+
+  .project-card:hover::before {
+    opacity: 1;
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 8px 40px rgba(139, 92, 246, 0.12), 0 0 80px rgba(139, 92, 246, 0.05);
+  }
+
+  .project-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .project-card__name-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .project-card__repo-icon {
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
+
+  .project-card__name {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .project-card__stars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #f59e0b;
+  }
+
+  .project-card__desc {
+    font-size: 0.88rem;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+    flex: 1;
+  }
+
+  .project-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .project-card__lang {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  .project-card__lang-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .project-card__arrow {
+    color: var(--color-text-muted);
+    transition: all 0.3s var(--ease-out);
+  }
+
+  .project-card:hover .project-card__arrow {
+    color: #8b5cf6;
+    transform: translate(3px, -3px);
+  }
+
+  /* ── Skills ── */
+  .skills__wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .skill-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+    transition: all 0.35s var(--ease-out);
+    cursor: default;
+  }
+
+  .skill-pill:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--pill-accent, rgba(255, 255, 255, 0.18));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .skill-pill__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .skills__extras {
+    padding-top: 8px;
+  }
+
+  .skills__note {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  .skills__secondary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skill-tag {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.3s var(--ease-out);
+  }
+
+  .skill-tag:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    color: var(--color-text);
+  }
+
+  /* ── Contact ── */
+  .contact__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .contact-card {
+    padding: 28px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    cursor: pointer;
+  }
+
+  .contact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 30px rgba(139, 92, 246, 0.1);
+  }
+
+  .contact-card__icon {
+    color: #8b5cf6;
+    flex-shrink: 0;
+  }
+
+  .contact-card__icon--stroke {
+    color: #06b6d4;
+  }
+
+  .contact-card__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .contact-card__label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .contact-card__value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .contact-card__arrow {
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: all 0.3s var(--ease-out);
+  }
+
+  .contact-card:hover .contact-card__arrow {
+    color: #8b5cf6;
+    transform: translate(3px, -3px);
+  }
+
+  /* ── Footer ── */
+  .aurora-footer {
+    padding: 40px 24px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .aurora-footer p {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.04em;
+    opacity: 0.6;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .nav__links {
+      display: none;
+    }
+
+    .about__grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .projects__grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .contact__grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .section {
+      padding: 72px 20px;
+    }
+
+    .hero {
+      padding: 80px 20px 60px;
+    }
+
+    .hero__name {
+      font-size: clamp(2.2rem, 10vw, 3.2rem);
+    }
+
+    .hero__actions {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .hero__btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .about__card {
+      padding: 24px 22px;
+    }
+
+    .project-card {
+      padding: 22px;
+    }
+
+    .contact-card {
+      padding: 22px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero__bio {
+      font-size: 0.95rem;
+    }
+
+    .skill-pill {
+      padding: 10px 18px;
+      font-size: 0.82rem;
+    }
+
+    .aurora-blob {
+      filter: blur(80px);
+      opacity: 0.3;
+    }
+
+    .aurora-blob--purple { width: 350px; height: 350px; }
+    .aurora-blob--cyan { width: 300px; height: 300px; }
+    .aurora-blob--emerald { width: 250px; height: 250px; }
+    .aurora-blob--purple-2 { width: 200px; height: 200px; }
+    .aurora-blob--cyan-2 { width: 180px; height: 180px; }
+  }
+
+  /* ── Selection Override ── */
+  ::selection {
+    background-color: #8b5cf6;
+    color: #fff;
+  }
+</style>
