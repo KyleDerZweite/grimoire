@@ -24,6 +24,7 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./sites/sircookie/dist:/usr/share/nginx/html/sircookie:ro
       - ./sites/yunasoul/dist:/usr/share/nginx/html/yunasoul:ro
+      - ./sites/kyle-portfolio/dist:/usr/share/nginx/html/portfolio:ro
     networks:
       - pangolin_net
     depends_on:
