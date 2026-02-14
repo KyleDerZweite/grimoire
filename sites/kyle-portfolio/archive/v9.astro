@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Kyle - Portfolio" accent="#8b5cf6">
+<BaseLayout title="Kyle - V9 Brutal-Term" accent="#8b5cf6">
   <div class="brutal-container">
     <div class="grid-overlay"></div>
     
@@ -30,7 +30,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
         </div>
         <div class="terminal-content" id="terminal-output">
-          <div class="line"><span class="prompt">guest@kyle:~$</span> <span class="cmd">init_protocol main</span></div>
+          <div class="line"><span class="prompt">guest@kyle:~$</span> <span class="cmd">init_protocol v9</span></div>
           <div class="line system">Initializing... [OK]</div>
           <div class="line system">Loading user: Leander Grau... [OK]</div>
           <div class="line system">KyleOS <span style="color: var(--primary)">v0.21.0</span></div>
@@ -49,27 +49,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="tape"></div>
           <h3>CURRENT_FOCUS</h3>
           <ul>
-            <li><a href="https://github.com/KyleDerZweite/dno-crawler" target="_blank">[ ] DNO-Crawler</a></li>
-            <li><a href="https://github.com/KyleHub-Dev/infrastructure" target="_blank">[ ] Kylehub Infra</a></li>
+            <li>[ ] Distributed File System (Rust)</li>
+            <li>[x] Wake up at 5AM</li>
+            <li>[ ] Read "Dune"</li>
           </ul>
-          <p class="scrawl">
-            "Currently asking an AI how to compile Bogo Sort into C because I don't have time to wait for O(N!), but I have time to configure a build pipeline."
-          </p>
         </div>
 
         <div class="sticky-note note-2">
           <div class="tape"></div>
           <h3>LINKS</h3>
           <a href="https://github.com/KyleDerZweite" target="_blank" class="brutal-link">GITHUB -></a>
-          <a href="https://blog.kylehub.dev" target="_blank" class="brutal-link">BLOG -></a>
-          <a href="mailto:kyle@kylehub.dev" class="brutal-link">MAIL -></a>
-        </div>
-
-        <div class="sticky-note note-3">
-          <div class="tape"></div>
-          <h3>SOCIALS</h3>
-          <a href="https://discord.gg/hAU3UdtyWr" target="_blank" class="brutal-link">DISCORD -></a>
-          <a href="https://github.com/VauxlNet/vauxl" target="_blank" class="brutal-link">VAUXL (Project) -></a>
+          <a href="#" class="brutal-link">BLOG -></a>
+          <a href="#" class="brutal-link">MAIL -></a>
         </div>
       </section>
 
@@ -89,43 +80,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
           <div class="stat-item">
             <span class="label">LOC</span>
-            <span class="value">818</span>
-          </div>
-        </div>
-        
-        <div class="stat-row">
-          <div class="stat-col">
-             <span class="label">CPU_LOAD</span>
-             <div class="progress-bar"><div class="fill" style="width: 45%"></div></div>
-          </div>
-          <div class="stat-col">
-             <span class="label">MEMORY</span>
-             <div class="progress-bar"><div class="fill" style="width: 72%"></div></div>
-          </div>
-          <div class="stat-col">
-             <span class="label">SWAP</span>
-             <div class="progress-bar"><div class="fill" style="width: 10%"></div></div>
-          </div>
-        </div>
-
-        <div class="process-table">
-          <div class="table-header">
-            <span>PID</span><span>USER</span><span>PR</span><span>NI</span><span>VIRT</span><span>RES</span><span>%CPU</span><span>COMMAND</span>
-          </div>
-          <div class="table-row">
-            <span>1001</span><span>kyle</span><span>20</span><span>0</span><span>485m</span><span>142m</span><span>1.2</span><span class="cmd-text">podman: newt</span>
-          </div>
-          <div class="table-row">
-            <span>1002</span><span>kyle</span><span>20</span><span>0</span><span>256m</span><span>48m</span><span>0.4</span><span class="cmd-text">podman: router</span>
-          </div>
-          <div class="table-row">
-            <span>1003</span><span>kyle</span><span>20</span><span>0</span><span>1.2g</span><span>356m</span><span>28.5</span><span class="cmd-text">podman: builder</span>
-          </div>
-          <div class="table-row">
-            <span>1152</span><span>kyle</span><span>20</span><span>0</span><span>324m</span><span>86m</span><span>0.8</span><span class="cmd-text">node (astro dev)</span>
-          </div>
-           <div class="table-row">
-            <span>882</span><span>root</span><span>20</span><span>0</span><span>156m</span><span>24m</span><span>0.1</span><span class="cmd-text">conmon</span>
+            <span class="value">>9000</span>
           </div>
         </div>
       </section>
@@ -247,7 +202,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: var(--text-main);
     font-family: var(--font-head);
     min-height: 100vh;
-    padding: 20px 40px;
+    padding: 2rem;
     position: relative;
     overflow-x: hidden;
   }
@@ -268,13 +223,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .header {
-    margin-bottom: 1.5rem;
+    margin-bottom: 3rem;
     position: relative;
     z-index: 10;
   }
 
   h1 {
-    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 700;
     letter-spacing: -0.05em;
     line-height: 1;
@@ -333,7 +288,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .terminal-card {
     display: flex;
     flex-direction: column;
-    min-height: 320px;
+    min-height: 400px;
   }
 
   .terminal-content {
@@ -342,7 +297,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-family: var(--font-mono);
     font-size: 0.95rem;
     overflow-y: auto;
-    max-height: 320px;
+    max-height: 400px;
   }
 
   .window-controls {
@@ -403,8 +358,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   /* Brutalist Sticky Notes */
   .notes-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
   }
 
@@ -416,7 +371,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .note-1 {
-    grid-column: span 2;
     transform: rotate(-2deg);
     background: var(--bg-dark); /* Transparent/Dark look */
   }
@@ -436,38 +390,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .note-2 .brutal-link:hover {
     background: #000;
     color: var(--primary);
-  }
-
-  .note-3 {
-    transform: rotate(2deg);
-    background: var(--bg-dark);
-    border: 2px solid var(--success);
-  }
-  
-  .note-3 h3 {
-    color: var(--success);
-    border-bottom-color: var(--success);
-  } 
-
-  .scrawl {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-style: italic;
-    margin-top: 1.5rem;
-    opacity: 0.8;
-    line-height: 1.4;
-    border-top: 1px dashed var(--border);
-    padding-top: 0.5rem;
-  }
-  
-  .sticky-note a {
-    color: inherit;
-    text-decoration: none;
-    border-bottom: 1px dotted currentColor;
-  }
-  
-  .sticky-note a:hover {
-    background: rgba(255,255,255,0.1);
   }
 
   .tape {
@@ -525,56 +447,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .stat-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    padding: 1rem 1.5rem 0.5rem;
+    padding: 1.5rem;
     gap: 1rem;
-    border-bottom: 1px dashed var(--border);
-  }
-
-  .stat-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    padding: 1rem 1.5rem;
-    gap: 1rem;
-    border-bottom: 1px dashed var(--border);
-  }
-  
-  .progress-bar {
-    height: 8px;
-    background: rgba(255,255,255,0.1);
-    margin-top: 5px;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .progress-bar .fill {
-    height: 100%;
-    background: var(--primary);
-    animation: pulse-width 2s infinite;
-  }
-  
-  .process-table {
-    padding: 1rem 1.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--text-muted);
-  }
-  
-  .table-header, .table-row {
-    display: grid;
-    grid-template-columns: 3fr 3fr 2fr 2fr 3fr 3fr 3fr 6fr;
-    gap: 0.5rem;
-    padding: 0.25rem 0;
-  }
-  
-  .table-header {
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 0.5rem;
-    color: var(--primary);
-    font-weight: bold;
-  }
-  
-  .cmd-text {
-    color: var(--success);
   }
 
   .stat-item {
@@ -582,12 +456,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     flex-direction: column;
     align-items: center;
     text-align: center;
-  }
-  
-  @keyframes pulse-width {
-    0% { opacity: 0.8; }
-    50% { opacity: 1; }
-    100% { opacity: 0.8; }
   }
 
   .stat-item .label {
@@ -623,14 +491,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
     
     .terminal-card {
-      grid-column: span 1;
-    }
-
-    .notes-section {
-      grid-template-columns: 1fr;
-    }
-    
-    .note-1 {
       grid-column: span 1;
     }
   }

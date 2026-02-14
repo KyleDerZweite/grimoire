@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const notes = [
+  { id: 1, title: "Next Project", content: "Build a distributed file system in Rust", rotate: "-2deg", color: "#FFF8D6" },
+  { id: 2, title: "Reading List", content: "Dune by Frank Herbert 📚", rotate: "3deg", color: "#E0F7FA" },
+  { id: 3, title: "Daily Habit", content: "Wake up at 5AM 🌅", rotate: "-1deg", color: "#FFEBEE" },
+  { id: 4, title: "Music", content: "Learn synthesizer basics 🎹", rotate: "2deg", color: "#F3E5F5" }
+];
+
+const uses = [
+  "VS Code + Vim emulation",
+  "NixOS",
+  "Split mech keyboard",
+  "Obsidian",
+  "Coffee ☕"
+];
+
+const garden = [
+  "Social Network for Introverts 🌱",
+  "Static Site Generator in Browser 🌿",
+  "Procedural City Generator 🏙️"
+];
+---
+
+<BaseLayout title="Kyle - V7 Workbench" accent="#8D6E63">
+  <div class="workbench">
+    <div class="desk">
+      <header class="card intro-card">
+        <h1 class="font-hand">Hi, I'm Kyle.</h1>
+        <p class="font-typewriter">Welcome to my digital workbench.</p>
+        <p class="font-typewriter small">It's a bit messy, but that's how I likE it.</p>
+      </header>
+
+      <div class="sticky-container">
+        {notes.map(note => (
+          <div class="sticky" style={`transform: rotate(${note.rotate}); background-color: ${note.color};`}>
+            <h3 class="font-hand">{note.title}</h3>
+            <p class="font-hand">{note.content}</p>
+            <div class="pin"></div>
+          </div>
+        ))}
+      </div>
+
+      <div class="card uses-card">
+        <h2 class="font-typewriter stamp">TOP SECRET: TOOLS</h2>
+        <ul class="font-typewriter list-disc pl-5">
+            {uses.map(use => <li>{use}</li>)}
+        </ul>
+      </div>
+
+      <div class="card garden-card">
+        <h2 class="font-hand">Garden of Ideas 🌻</h2>
+         <ul class="font-hand list-none">
+            {garden.map(idea => <li>• {idea}</li>)}
+        </ul>
+      </div>
+
+      <div class="card links-card">
+        <h2 class="font-typewriter">Connect</h2>
+        <div class="flex gap-4 mt-2">
+            <a href="#" class="btn-skeuomorphic">GitHub</a>
+            <a href="#" class="btn-skeuomorphic">Twitter</a>
+            <a href="/" class="btn-skeuomorphic">Exit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Special+Elite&display=swap');
+
+  :root {
+    --wood-color: #d7ccc8;
+    --paper-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  .workbench {
+    background-color: var(--wood-color);
+    background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png"); /* Fallback or use a CSS pattern */
+    min-height: 100vh;
+    padding: 2rem;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .desk {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    height: 800px; /* Fixed height for absolute positioning vibe */
+    /* Often better to use grid/flex for responsiveness but keeping 'messy' vibe */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .font-hand {
+    font-family: 'Caveat', cursive;
+    color: #333;
+  }
+
+  .font-typewriter {
+    font-family: 'Special Elite', monospace;
+    color: #222;
+  }
+  
+  .small {
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+
+  .card {
+    background: white;
+    padding: 1.5rem;
+    box-shadow: var(--paper-shadow);
+    transform: rotate(-1deg);
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: scale(1.02) rotate(0deg) !important;
+    z-index: 10;
+  }
+
+  .intro-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    transform: rotate(-2deg);
+    max-width: 350px;
+    margin: auto;
+  }
+
+  .intro-card h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .sticky-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sticky {
+    width: 150px;
+    height: 150px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .sticky h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+
+  .sticky p {
+    font-size: 1rem;
+  }
+
+  .pin {
+    width: 12px;
+    height: 12px;
+    background: red;
+    border-radius: 50%;
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+  }
+
+  .uses-card {
+    background: #eee;
+    transform: rotate(1deg);
+    border: 1px dashed #999;
+  }
+
+  .stamp {
+    color: #d32f2f;
+    border: 2px solid #d32f2f;
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    transform: rotate(-5deg);
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  .garden-card {
+    background: #f1f8e9; /* Light green */
+    transform: rotate(2deg);
+    border-radius: 1rem; /* Organic shape */
+  }
+
+  .garden-card li {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .links-card {
+    background: #fff;
+    transform: rotate(-1deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn-skeuomorphic {
+    background: linear-gradient(to bottom, #f0f0f0, #dcdcdc);
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-family: 'Special Elite', monospace;
+    color: #333;
+    text-decoration: none;
+    box-shadow: 0 2px 0 #bbb;
+    font-weight: bold;
+  }
+
+  .btn-skeuomorphic:active {
+    box-shadow: none;
+    transform: translateY(2px);
+  }
+
+  @media (max-width: 768px) {
+    .desk {
+      height: auto;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+</style>

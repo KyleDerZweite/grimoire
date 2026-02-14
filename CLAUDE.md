@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Grimoire is a **Static Site Factory** — a monorepo for creating bespoke static websites for friends using Astro + Tailwind CSS. Each site under `sites/` is a unique Astro project (blank canvas), not a CMS-driven page. Sites are served via NGINX and tunneled through Pangolin/Newt.
+Grimoire is a **Static Site Factory** - a monorepo for creating bespoke static websites for friends using Astro + Tailwind CSS. Each site under `sites/` is a unique Astro project (blank canvas), not a CMS-driven page. Sites are served via NGINX and tunneled through Pangolin/Newt.
 
 ## Commands
 
@@ -45,10 +45,10 @@ podman-compose restart builder    # Force immediate rebuild
 
 ## Monorepo Structure
 
-- `templates/base-astro/` — Blueprint for new sites. `new-site.sh` copies this to `sites/`.
-- `sites/<name>/` — Each site is an independent Astro project with its own `package.json`, `astro.config.mjs`, `src/`, and `dist/`.
-- `scripts/build-loop.sh` — Builder container entrypoint: initial build on start, then git-poll loop.
-- `scripts/new-site.sh` — Copies template, updates package name, prints deployment instructions.
+- `templates/base-astro/` - Blueprint for new sites. `new-site.sh` copies this to `sites/`.
+- `sites/<name>/` - Each site is an independent Astro project with its own `package.json`, `astro.config.mjs`, `src/`, and `dist/`.
+- `scripts/build-loop.sh` - Builder container entrypoint: initial build on start, then git-poll loop.
+- `scripts/new-site.sh` - Copies template, updates package name, prints deployment instructions.
 
 PNPM workspaces defined in `pnpm-workspace.yaml` cover `templates/*` and `sites/*`.
 
@@ -61,7 +61,7 @@ PNPM workspaces defined in `pnpm-workspace.yaml` cover `templates/*` and `sites/
 
 ## Stack Details
 
-- **Astro 5** with `output: 'static'` — zero JavaScript by default
+- **Astro 5** with `output: 'static'` - zero JavaScript by default
 - **Tailwind CSS 4** via `@tailwindcss/vite` plugin (imported as `@import "tailwindcss"` in CSS)
 - **Node >=20, PNPM >=9**
 - **Podman** (not Docker) with podman-compose
@@ -72,4 +72,4 @@ Each site defines its own theme via CSS custom properties (e.g., `--color-bg`, `
 
 ## Design Philosophy
 
-Sites should have bold, intentional aesthetics — not generic "AI slop." Prioritize strong typography, purposeful color palettes, considered motion/animation, and thoughtful spatial composition. Each site is a creative project, not a template fill-in.
+Sites should have bold, intentional aesthetics - not generic "AI slop." Prioritize strong typography, purposeful color palettes, considered motion/animation, and thoughtful spatial composition. Each site is a creative project, not a template fill-in.
