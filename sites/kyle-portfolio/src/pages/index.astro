@@ -9,7 +9,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <header class="header">
       <h1 class="glitch-text" data-text="LEANDER_GRAU">LEANDER_GRAU</h1>
       <p class="subtitle">> FULL_STACK_ENGINEER.EXE</p>
-      <p class="tags">> ONLINE_TAG: KYLE / KYLEDERZWEITE</p>
+      <div class="tag-container">
+        <span class="tag-label">ONLINE_ID:</span>
+        <span class="tag-pill">KYLE</span>
+        <span class="tag-pill secondary">KYLEDERZWEITE</span>
+      </div>
     </header>
 
     <main class="main-grid">
@@ -287,6 +291,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: var(--primary);
     font-size: 1.1rem;
     letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .tag-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+
+  .tag-label {
+    color: var(--text-muted);
+    font-weight: bold;
+    margin-right: 0.25rem;
+  }
+
+  .tag-pill {
+    background: rgba(139, 92, 246, 0.15);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+  }
+  
+  .tag-pill.secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    border-color: var(--border);
   }
 
   .main-grid {
