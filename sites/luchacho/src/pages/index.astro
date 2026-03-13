@@ -1,0 +1,192 @@
+---
+// index.astro - Link-in-bio page
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LinkButton from '../components/LinkButton.astro';
+
+// ── Configure your profile ──
+const profile = {
+  name: 'Luchacho',
+  handle: '@luchacho',
+  bio: 'Hallo, ich bin Lukas. 22 Jahre alt, studiere Informatik. Meistens spiele ich LoL wenn ich live bin, aber es können auch andere Games kommen.',
+  avatar: '',
+};
+
+const links = [
+  { href: 'https://www.twitch.tv/luchacho_lol', label: 'Twitch', icon: '◉' },
+  { href: 'https://discord.gg/ud7QRuJKBG', label: 'Discord', icon: '⬡' },
+  { href: 'https://www.instagram.com/lukas.klb_', label: 'Instagram', icon: '📸' },
+  { href: 'https://www.youtube.com/@luchacho_LoL', label: 'YouTube', icon: '▶' },
+  { href: 'https://www.tiktok.com/@luchacho_lol', label: 'TikTok', icon: '♪' },
+  { href: 'https://x.com/Luchahco1733', label: 'X', icon: '𝕏' },
+];
+---
+
+<BaseLayout title={`${profile.name}`} description={profile.bio}>
+  <main class="page">
+
+    <!-- Decorative background elements -->
+    <div class="bg-glow bg-glow--top" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow--bottom" aria-hidden="true"></div>
+
+    <div class="container">
+
+      <!-- ── Hero Section ── -->
+      <section class="hero">
+
+        <!-- Name & Handle -->
+        <h1 class="hero__name animate-fade-up delay-1">{profile.name}</h1>
+        <p class="hero__handle animate-fade-up delay-2">{profile.handle}</p>
+        <p class="hero__bio animate-fade-up delay-3">{profile.bio}</p>
+
+      </section>
+
+      <!-- ── Links Section ── -->
+      <section class="links">
+        {links.map((link, i) => (
+          <div class={`animate-fade-up delay-${i + 3}`}>
+            <LinkButton href={link.href} label={link.label} icon={link.icon} />
+          </div>
+        ))}
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer animate-fade-up delay-8">
+        <p>&copy; {new Date().getFullYear()} {profile.name}</p>
+      </footer>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  /* ── Page ── */
+  .page {
+    width: 100%;
+    min-height: 100dvh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 160px;
+    padding-bottom: 48px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* ── Background Glows ── */
+  .bg-glow {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .bg-glow--top {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(191, 109, 74, 0.08) 0%, transparent 70%);
+    top: -180px;
+    right: -100px;
+  }
+
+  .bg-glow--bottom {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(191, 109, 74, 0.06) 0%, transparent 70%);
+    bottom: -120px;
+    left: -80px;
+  }
+
+  /* ── Container ── */
+  .container {
+    width: 100%;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    transform: translateX(-3px);
+  }
+
+  /* ── Hero ── */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  /* Text */
+  .hero__name {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 600;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin-bottom: 8px;
+  }
+
+  .hero__handle {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 16px;
+  }
+
+  .hero__bio {
+    font-family: var(--font-body);
+    font-size: 0.925rem;
+    font-weight: 300;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    max-width: 320px;
+  }
+
+  /* ── Links ── */
+  .links {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 40px;
+    transform: translateX(-8px);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+  }
+
+  .footer p {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 480px) {
+    .page {
+      padding: 36px 16px;
+    }
+
+    .hero__name {
+      font-size: 2rem;
+    }
+
+    .container {
+      max-width: 100%;
+    }
+  }
+</style>
