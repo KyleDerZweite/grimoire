@@ -1,10 +1,11 @@
 ---
 // LinkButton.astro - A single link pill with icon + label
+import { Icon } from 'astro-icon/components';
 
 interface Props {
   href: string;
   label: string;
-  icon?: string;   // emoji or short text
+  icon?: string;   // Icon name for astro-icon
   external?: boolean;
 }
 
@@ -17,7 +18,7 @@ const { href, label, icon, external = true } = Astro.props;
   target={external ? '_blank' : undefined}
   rel={external ? 'noopener noreferrer' : undefined}
 >
-  {icon && <span class="link-button__icon">{icon}</span>}
+  {icon && <Icon name={icon} class="link-button__icon" />}
   <span class="link-button__label">{label}</span>
   <svg class="link-button__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
     <path d="M6 3.5L10.5 8L6 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
